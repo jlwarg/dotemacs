@@ -13,7 +13,7 @@ I consider this a learning project to tailor my emacs expierience as I go along.
    
 Having used vim for over a decade, I came across spacemacs at around 2015. At first I was totally enthusiastic.
 I could pretty much move directly from vim to spacemacs and be as productive as I had been before. But after a
-while, my config broke due to an update for the first time. And her I was, without a clue how spacemacs worked
+while, my config broke due to an update for the first time. And here I was, without a clue how spacemacs worked
 and nowhere to start searching for the problem.
 I still tried to dig in, but to no avail. Trying to learn emacs, spacemacs and emacs lisp at the same time was
 more than I could handle. So I returned to my zsh/tmux/vim setup, which was much easier (at least for me).
