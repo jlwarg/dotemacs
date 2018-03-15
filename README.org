@@ -1,0 +1,27 @@
+* My Emacs configuration
+
+This is my first attempt at an emacs configuration after getting a taste of emacs as a spacemacs user.
+
+** Disclaimer
+
+*Don't just use my config or parts of it blindly.*
+
+I don't really know what I'm doing with emacs so there are likely some stupid mistakes in this init file.
+I consider this a learning project to tailor my emacs expierience as I go along.
+
+** Motivation
+   
+Having used vim for over a decade, I came across spacemacs at around 2015. At first I was totally enthusiastic.
+I could pretty much move directly from vim to spacemacs and be as productive as I had been before. But after a
+while, my config broke due to an update for the first time. And her I was, without a clue how spacemacs worked
+and nowhere to start searching for the problem.
+I still tried to dig in, but to no avail. Trying to learn emacs, spacemacs and emacs lisp at the same time was
+more than I could handle. So I returned to my zsh/tmux/vim setup, which was much easier (at least for me).
+
+There were two things I really missed:
+
+- Org Mode
+- Having an excuse to play with a Lisp
+  
+So I decided to start from scratch. When I reached a point in my personal config that I found worth saving I created
+this repository.
