@@ -19,6 +19,7 @@ I like to understand how my tools work and to be able to tinker with them which 
   (setq-default abbrev-mode t)    ; I want to use my abbreviations everywhere
   (menu-bar-mode -1)              ; No menu bar
   (tool-bar-mode -1)              ; No tool bar
+  (scroll-bar-mode -1)            ; No scroll bar
   (setq inhibit-startup-screen t) ; No startup screen
   (load-theme 'wheatgrass t)
   (setq indent-tabs-mode nil)     ; always use spaces for indenting
@@ -28,7 +29,23 @@ I like to understand how my tools work and to be able to tinker with them which 
   (setq tramp-default-method "ssh")
   (add-to-list 'default-frame-alist '(font . "Source Code Pro 10"))
   (setq initial-scratch-message ";; Welcome to Emacs")
+
+  ;; send mail with msmtp
+  (setq sendmail-program "/usr/bin/msmtp")
+
+  ;; never center point when scrolling out of frame, just bring it back to view
+  ;; aka "Scroll like vim would", sort of
+  (setq scroll-conservatively 101)
+
+  ;; set the recommended orgmode shortcuts
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cc" 'org-capture)
+  (global-set-key "\C-cb" 'org-iswitchb)
 #+end_src
+
+#+RESULTS:
+: org-iswitchb
 
 ** Bootstrap
 *** Package Sources
@@ -185,11 +202,12 @@ Solution: Bind #'org-cycle to "TAB" explicitly.
 #+begin_src emacs-lisp :tangle yes
   (use-package org
     :ensure org-plus-contrib
+    :init
+    (visual-line-mode t)
     :config
     (evil-define-key 'normal org-mode-map (kbd "TAB") #'org-cycle) ; TAB is org-cycle, dammit!
     (setq org-hide-leading-stars 'hidestars)
-    (setq org-return-follows-link t)
-    (visual-line-mode t))
+    (setq org-return-follows-link t))
 #+end_src
 
 ** Reading email
