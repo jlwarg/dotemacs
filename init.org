@@ -68,7 +68,7 @@ I like to understand how my tools work and to be able to tinker with them which 
      (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t))
  #+end_src
 
- *** Use-package
+*** Use-package
  
 #+begin_src emacs-lisp :tangle yes
    ;; bootstrap use-package
