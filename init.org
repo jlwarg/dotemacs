@@ -276,6 +276,17 @@ Well, this is supposed to complete anything, right? Just a quick try here
     (define-key company-active-map (kbd "C-p") #'company-select-previous))
 #+end_src
 
+*** Syntax checking
+
+Testing flycheck as a syntax checker.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
+#+end_src
+
+
 *** Python
 Use ipython for inferior python mode and use simple prompt to avoid gibberish caused by ansi-color codes
 
