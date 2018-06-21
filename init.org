@@ -117,7 +117,7 @@ for the time being
   :diminish (ivy-mode . "") ; don't display ivy in modeline
   :init (ivy-mode 1)        ; enable ivy globally at startup
   :bind (:map ivy-mode-map  ; bind in the ivy buffer
-	("C-'" . ivy-avy))  ; C-' to ivy-avy
+        ("C-'" . ivy-avy))  ; C-' to ivy-avy
   :config
   (setq ivy-use-virtual-buffers t)  ; extend searching to bookmarks and ...
   (setq ivy-height 20)              ; set height of the ivy window
@@ -131,6 +131,7 @@ for the time being
    ("C-x C-r" . counsel-recentf)   ; search recently edited files
   )
 )
+
 #+end_src
 
 ** Key bindings
@@ -242,8 +243,6 @@ Notmuch is installed via the host's package manager. We need compatibility and n
    :config
    (evil-add-hjkl-bindings magit-status-mode-map 'emacs))
  #+end_src
-
-
    
 *** Smartparens
 
