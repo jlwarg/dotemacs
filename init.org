@@ -276,15 +276,12 @@ Well, this is supposed to complete anything, right? Just a quick try here
 #+end_src
 
 *** Syntax checking
-
 Testing flycheck as a syntax checker.
-
 #+begin_src emacs-lisp :tangle yes
   (use-package flycheck
     :ensure t
     :init (global-flycheck-mode))
 #+end_src
-
 
 *** Python
 Use ipython for inferior python mode and use simple prompt to avoid gibberish caused by ansi-color codes
@@ -331,3 +328,13 @@ From the last point, I use remote hosts and docker. For the latter, the  [[https
   (pyvenv-tracking-mode 1))
 #+end_src
 
+*** Common Lisp
+I use [[http://quicklisp.org][Quicklisp]], which (as I've been told) spares some hassle setting up slime. Otoh, the slime version that came with it is buggy when used with emacs 26.1 (which I use). So I just put a newer slime version in the quicklisp slime directory and it seems to work so far.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  ;; common lisp
+  (use-package slime
+    :ensure t)
+  (load (expand-file-name "~/quicklisp/slime-helper.el"))
+  (setq inferior-lisp-program "/bin/sbcl")
+#+END_SRC
