@@ -21,6 +21,8 @@ I like to understand how my tools work and to be able to tinker with them which 
   (tool-bar-mode -1)              ; No tool bar
   (scroll-bar-mode -1)            ; No scroll bar
   (setq inhibit-startup-screen t) ; No startup screen
+  ;; recognize themes in ~/.emacs.d/themes
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
   (load-theme 'wheatgrass t)
   (setq indent-tabs-mode nil)     ; always use spaces for indenting
   (column-number-mode)            ; Display column number in mode line
@@ -32,6 +34,7 @@ I like to understand how my tools work and to be able to tinker with them which 
 
   ;; send mail with msmtp
   (setq sendmail-program "/usr/bin/msmtp")
+
 
   ;; never center point when scrolling out of frame, just bring it back to view
   ;; aka "Scroll like vim would", sort of
@@ -53,9 +56,6 @@ I like to understand how my tools work and to be able to tinker with them which 
           ("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/journal.org")
            "* %?\nEntered on %U\n %i\n %a")))
 #+end_src
-
-#+RESULTS:
-: org-iswitchb
 
 ** Bootstrap
 *** Package Sources
