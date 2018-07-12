@@ -307,13 +307,16 @@ for python.
 
 From the last point, I use remote hosts and docker. For the latter, the  [[https://github.com/emacs-pe/docker-tramp.el][Docker Tramp]] module is needed, apparently.
 
+To use code folding, hs-minor-mode has to be activated, hence the last hook below.
+
 #+begin_src emacs-lisp :tangle yes
   (use-package anaconda-mode
     :ensure t
     :config
       (add-hook 'python-mode-hook 'anaconda-mode)
       (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
-      (add-hook 'python-mode-hook 'hs-minor-mode))
+      (add-hook 'python-mode-hook 'hs-minor-mode) ;; code folding
+      (add-hook 'python-mode-hook 'flycheck-mode));; syntax checking
 
   (use-package company-anaconda
     :ensure t)
