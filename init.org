@@ -277,10 +277,10 @@ Well, this is supposed to complete anything, right? Just a quick try here
 
 *** Syntax checking
 Testing flycheck as a syntax checker.
+Flycheck mode will be added as a hook for each mode it's supposed to work in as it masked ord key bindings when I activated it using (global-flycheck-mode)
 #+begin_src emacs-lisp :tangle yes
   (use-package flycheck
-    :ensure t
-    :init (global-flycheck-mode))
+    :ensure t)
 #+end_src
 
 *** Python
@@ -316,7 +316,7 @@ To use code folding, hs-minor-mode has to be activated, hence the last hook belo
       (add-hook 'python-mode-hook 'anaconda-mode)
       (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
       (add-hook 'python-mode-hook 'hs-minor-mode) ;; code folding
-      (add-hook 'python-mode-hook 'flycheck-mode));; syntax checking
+      (add-hook 'python-mode-hook 'flycheck-mode)) ;; syntax checking
 
   (use-package company-anaconda
     :ensure t)
