@@ -343,3 +343,10 @@ I use [[http://quicklisp.org][Quicklisp]], which (as I've been told) spares some
   (load (expand-file-name "~/quicklisp/slime-helper.el"))
   (setq inferior-lisp-program "/bin/sbcl")
 #+END_SRC
+
+*** HTML
+Emmet mode seems to be the way to go.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package emmet-mode
+    :ensure t)
+#+END_SRC
