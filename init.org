@@ -86,9 +86,20 @@ I like to understand how my tools work and to be able to tinker with them which 
    ;; load evil
    (use-package evil
      :ensure t ;; install the evil package if not installed
+     :init
+     (setq evil-want-integration nil)
      :config ;; tweak evil after loading it
-     (evil-mode))
+     (evil-mode 1))
  #+end_src
+ I guess I need vim bindings everywhere. My initial idea was to use vim bindings for text only and stick with the original bindings for everything else (Magit, Mail, etc.) but then I had a hard time switching away from my email inbox buffer. Rather than configuring every mode myself, I decided to give evil-collection a try.
+ 
+ #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package evil-collection
+     :after evil
+     :ensure t
+     :config
+     (evil-collection-init))
+ #+END_SRC
 
 ** which-key
 
