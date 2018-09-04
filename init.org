@@ -361,3 +361,16 @@ Emmet mode seems to be the way to go.
   (use-package emmet-mode
     :ensure t)
 #+END_SRC
+** Customization functions
+*** Themes
+Until recently, I wasn't aware that `load-theme` will not switch themes, but add the face properties of the newly loaded theme to the ones already loaded.
+That's not what I want, so I advice load-theme to disable all themes before loading the specified one.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun disable-all-themes ()
+    "disable all active themes."
+    (dolist (i custom-enabled-themes)
+      (disable-theme i)))
+
+  (defadvice load-theme (before disable-themes-first activate)
+    (disable-all-themes))
+#+END_SRC
