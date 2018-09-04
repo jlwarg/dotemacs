@@ -363,7 +363,7 @@ Emmet mode seems to be the way to go.
 #+END_SRC
 ** Customization functions
 *** Themes
-Until recently, I wasn't aware that `load-theme` will not switch themes, but add the face properties of the newly loaded theme to the ones already loaded.
+Until recently, I wasn't aware that `load-theme` will not switch themes, but add the face properties of the newly loaded theme to the ones already loaded thus "stacking" themes.
 That's not what I want, so I advice load-theme to disable all themes before loading the specified one.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun disable-all-themes ()
