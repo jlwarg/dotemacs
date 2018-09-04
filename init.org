@@ -40,6 +40,41 @@ I like to understand how my tools work and to be able to tinker with them which 
   ;; aka "Scroll like vim would", sort of
   (setq scroll-conservatively 101)
 
+  ;; set european/military time format
+  (setq display-time-24hr-format 1)
+
+  ;; Localize calendar
+  ;; See: https://www.emacswiki.org/emacs/CalendarLocalization
+  (add-hook 'calendar-load-hook
+            (lambda ()
+              (calendar-set-date-style 'european)))
+  (setq calendar-week-start-day 1
+        calendar-day-name-array ["Sonntag" "Montag" "Dienstag" "Mittwoch"
+                                 "Donnerstag" "Freitag" "Samstag"]
+        calendar-month-name-array ["Januar" "Februar" "März" "April" "Mai"
+                                   "Juni" "Juli" "August" "September"
+                                   "Oktober" "November" "Dezember"]
+        solar-n-hemi-seasons '("Frühlingsanfang" "Sommeranfang" "Herbstanfang" "Winteranfang")
+        holiday-general-holidays '((holiday-fixed 1 1 "Neujahr")
+                                   (holiday-fixed 5 1 "Tag der Arbeit")
+                                   (holiday-fixed 10 3 "Tag der Deutschen Einheit"))
+        holiday-christian-holidays '((holiday-float 12 0 -4 "1. Advent" 24)
+                                     (holiday-float 12 0 -3 "2. Advent" 24)
+                                     (holiday-float 12 0 -2 "3. Advent" 24)
+                                     (holiday-float 12 0 -1 "4. Advent" 24)
+                                     (holiday-fixed 12 25 "1. Weihnachtstag")
+                                     (holiday-fixed 12 26 "2. Weihnachtstag")
+                                     (holiday-easter-etc -48 "Rosenmontag")
+                                     (holiday-easter-etc -2 "Karfreitag")
+                                     (holiday-easter-etc 0 "Ostersonntag")
+                                     (holiday-easter-etc 1 "Ostermontag")
+                                     (holiday-easter-etc +39 "Christi Himmelfahrt")
+                                     (holiday-easter-etc +49 "Pfingstsonntag")
+                                     (holiday-easter-etc +50 "Pfingstmontag")
+                                     (holiday-easter-etc +60 "Fronleichnam")
+                                     (holiday-fixed 11 1 "Allerheiligen")))
+
+
   ;; Basic orgmode settings
   (global-set-key "\C-cl" 'org-store-link)
   (global-set-key "\C-ca" 'org-agenda)
