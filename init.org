@@ -400,9 +400,13 @@ Emmet mode seems to be the way to go.
 *** Themes
 Until recently, I wasn't aware that `load-theme` will not switch themes, but add the face properties of the newly loaded theme to the ones already loaded thus "stacking" themes.
 That's not what I want, so I advice load-theme to disable all themes before loading the specified one.
+
+What I'm doing here is [[https://stackoverflow.com/questions/22866733/emacs-disable-theme-after-loading-a-different-one-themes-conflict][probably not a good idea]], so I print out a message when disabling themes. This way, I'll have an entry in in the message buffer to remind me if I ever run into problems because of this. 
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun disable-all-themes ()
     "disable all active themes."
+    (message "disabling all active themes")
     (dolist (i custom-enabled-themes)
       (disable-theme i)))
 
