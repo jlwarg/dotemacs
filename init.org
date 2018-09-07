@@ -35,6 +35,9 @@ I like to understand how my tools work and to be able to tinker with them which 
   ;; send mail with msmtp
   (setq sendmail-program "/usr/bin/msmtp")
 
+  ;; Enable emacs to send desktop notifications
+  (require 'notifications-notify)
+
 
   ;; never center point when scrolling out of frame, just bring it back to view
   ;; aka "Scroll like vim would", sort of
