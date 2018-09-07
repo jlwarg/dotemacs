@@ -270,7 +270,9 @@ Solution: Bind #'org-cycle to "TAB" explicitly.
           '(("t" "Todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
              "* TODO %?\n %i\n %a")
             ("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/journal.org")
-             "* %?\nEntered on %U\n %i\n %a"))
+             "* %?\nEntered on %U\n %i\n %a")
+            ("a" "Appointment" entry (file+headline "~/Dropbox/org/appointments.org" "Termin")
+             "* %?\n%^{Zeitpunkt}T"))
           org-log-done 'time
           org-log-into-drawer t)
     (setq org-agenda-custom-commands
