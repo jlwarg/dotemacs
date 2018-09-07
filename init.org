@@ -92,7 +92,13 @@ I like to understand how my tools work and to be able to tinker with them which 
         '(("t" "Todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
            "* TODO %?\n %i\n %a")
           ("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/journal.org")
-           "* %?\nEntered on %U\n %i\n %a")))
+           "* %?\nEntered on %U\n %i\n %a"))
+        org-log-done 'time
+        org-log-into-drawer t)
+  (setq org-agenda-custom-commands
+        '(("D" "Daily Action List"
+           ((agenda "" ((org-agenda-span 1)
+                        (org-agenda-sorting-strategy '((agenda time-up priority-down tag-up )))))))))
 #+end_src
 
 ** Bootstrap
