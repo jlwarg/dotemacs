@@ -263,7 +263,7 @@ Solution: Bind #'org-cycle to "TAB" explicitly.
   (use-package org
     :ensure org-plus-contrib
     :init
-    (visual-line-mode t)
+    (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
     :config
     (evil-define-key 'normal org-mode-map (kbd "TAB") #'org-cycle) ; TAB is org-cycle, dammit!
     (setq org-hide-leading-stars 'hidestars)
