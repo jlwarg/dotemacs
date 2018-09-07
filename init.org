@@ -260,7 +260,7 @@ Solution: Bind #'org-cycle to "TAB" explicitly.
     (setq org-hide-leading-stars 'hidestars)
     (setq org-return-follows-link t)
     (setq org-todo-keywords
-          '((sequence "TODO(t)" "NEXT(n)" "WAITING(w@/!)" | "DONE(d!)" "CANCELLED(c@)"))))
+          '((sequence "TODO(t)" "NEXT(n)" "WAITING(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)"))))
     (setq org-catch-invisible-edits "smart"
           org-startup-indented t
           org-agenda-files '("~/Dropbox/org/")
