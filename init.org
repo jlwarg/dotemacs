@@ -84,22 +84,6 @@ The plan is to incrementally turn emacs into an environment that can replace my 
   (global-set-key "\C-ca" 'org-agenda)
   (global-set-key "\C-cc" 'org-capture)
   (global-set-key "\C-cb" 'org-switchb)
-  (setq org-catch-invisible-edits "smart"
-        org-startup-indented t
-        org-agenda-files '("~/Dropbox/org/")
-        org-directory "~/Dropbox/org"
-        org-default-notes-file (concat org-directory "/inbox.org")
-        org-capture-templates
-        '(("t" "Todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
-           "* TODO %?\n %i\n %a")
-          ("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/journal.org")
-           "* %?\nEntered on %U\n %i\n %a"))
-        org-log-done 'time
-        org-log-into-drawer t)
-  (setq org-agenda-custom-commands
-        '(("D" "Daily Action List"
-           ((agenda "" ((org-agenda-span 1)
-                        (org-agenda-sorting-strategy '((agenda time-up priority-down tag-up )))))))))
 #+end_src
 
 ** Bootstrap
@@ -274,7 +258,25 @@ Solution: Bind #'org-cycle to "TAB" explicitly.
     :config
     (evil-define-key 'normal org-mode-map (kbd "TAB") #'org-cycle) ; TAB is org-cycle, dammit!
     (setq org-hide-leading-stars 'hidestars)
-    (setq org-return-follows-link t))
+    (setq org-return-follows-link t)
+    (setq org-todo-keywords
+          '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" | "DONE(d)" "CANCELLED(c)"))))
+    (setq org-catch-invisible-edits "smart"
+          org-startup-indented t
+          org-agenda-files '("~/Dropbox/org/")
+          org-directory "~/Dropbox/org"
+          org-default-notes-file (concat org-directory "/inbox.org")
+          org-capture-templates
+          '(("t" "Todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
+             "* TODO %?\n %i\n %a")
+            ("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/journal.org")
+             "* %?\nEntered on %U\n %i\n %a"))
+          org-log-done 'time
+          org-log-into-drawer t)
+    (setq org-agenda-custom-commands
+          '(("D" "Daily Action List"
+             ((agenda "" ((org-agenda-span 1)
+                          (org-agenda-sorting-strategy '((agenda time-up priority-down tag-up )))))))))
 #+end_src
 
 ** Reading email
