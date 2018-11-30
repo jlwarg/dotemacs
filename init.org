@@ -85,7 +85,6 @@ The plan is to incrementally turn emacs into an environment that can replace my 
   (global-set-key "\C-cc" 'org-capture)
   (global-set-key "\C-cb" 'org-switchb)
 #+end_src
-
 ** Bootstrap
 *** Package Sources
 
@@ -351,7 +350,12 @@ Notmuch is installed via the host's package manager. We need compatibility and n
 
 
 ** Programming
-   
+*** Code folding   
+Try Origami..
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package origami
+    :ensure t)
+#+END_SRC
 *** Version control
 
  Magit looks like the best thing since sliced bread for this purpose.
