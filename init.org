@@ -24,7 +24,7 @@ The plan is to incrementally turn emacs into an environment that can replace my 
   (setq inhibit-startup-screen t) ; No startup screen
   ;; recognize themes in ~/.emacs.d/themes
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-  (load-theme 'flatland t)
+  (load-theme 'adwaita t)
   (setq indent-tabs-mode nil)     ; always use spaces for indenting
   (column-number-mode)            ; Display column number in mode line
   (display-time)                  ; Display time in mode line
