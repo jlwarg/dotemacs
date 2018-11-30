@@ -106,6 +106,26 @@ The plan is to incrementally turn emacs into an environment that can replace my 
      (package-install 'use-package))
    (require 'use-package)
 #+end_src
+** Appearance
+Although I don't want to use spacemacs, I really like its appearance, so:
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package spacemacs-theme
+    :ensure t
+    :defer t
+    :init
+    (load-theme 'spacemacs-dark t)
+    (setq spacemacs-theme-org-agenda-height nil)
+    (setq spacemacs-theme-org-height nil))
+
+  (use-package spaceline
+    :ensure t
+    :demand t
+    :init
+    (setq powerline-default-separator 'arrow-fade)
+    :config
+    (require 'spaceline-config)
+    (spaceline-spacemacs-theme))
+#+END_SRC
 
 ** Evil Mode
  I really tried to go without it, but text navigation in vanilla Emacs is crippled.
