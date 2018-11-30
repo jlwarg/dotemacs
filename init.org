@@ -160,8 +160,8 @@ Although I don't want to use spacemacs, I really like its appearance, so:
     :config
     (which-key-setup-side-window-bottom)
     (setq which-key-sort-order 'which-key-key-order-alpha
-	  which-key-side-window-max-width 0.33
-	  which-key-idle-delay 0.01))
+          which-key-side-window-max-width 0.33
+          which-key-idle-delay 0.01))
 #+end_src
 
 ** Fuzzy search
@@ -270,7 +270,7 @@ so here goes:
 Org-Mode shows strange behaviour with evil: If I'm in a graphical frame ('emacsclient -c'), <TAB> is bound to 'org-cycle', if I open the emacsclient in a terminal ('emacsclient -t'), it is bound to 'evil-jump-forward'.
 Solution: Bind #'org-cycle to "TAB" explicitly.
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
   (use-package org
     :ensure org-plus-contrib
     :init
@@ -300,6 +300,45 @@ Solution: Bind #'org-cycle to "TAB" explicitly.
              ((agenda "" ((org-agenda-span 1)
                           (org-agenda-sorting-strategy '((agenda time-up priority-down tag-up )))))))))
 #+end_src
+
+The above turned out to be overwhelming for the time being. Now trying something else inspired by [[https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html][this blog post]].
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package org
+    :ensure org-plus-contrib
+    :init
+    (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
+    :config
+    (evil-define-key 'normal org-mode-map (kbd "TAB") #'org-cycle) ; TAB is org-cycle, dammit!
+    (setq org-hide-leading-stars 'hidestars)
+    (setq org-return-follows-link t)
+    (setq org-todo-keywords
+          '((sequence "TODO(t)" "WAITING(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)"))))
+    (setq org-catch-invisible-edits "smart"
+          org-startup-indented t
+          org-agenda-files '("~/Dropbox/new_org/inbox.org"
+                             "~/Dropbox/new_org/gtd.org"
+                             "~/Dropbox/new_org/tickler.org")
+          org-directory "~/Dropbox/new_org"
+          org-default-notes-file (concat org-directory "/inbox.org")
+          org-capture-templates
+          '(("t" "Todo [inbox]" entry
+             (file+headline "~/Dropbox/new_org/inbox.org" "Tasks")
+             "* TODO %i%?")
+            ("T" "Tickler" entry
+             (file+headline "~/Dropbox/new_org/tickler.org" "Tickler")
+             "* %i%? \n %U"))
+          org-refile-targets '(("~/Dropbox/new_org/gtd.org" :maxlevel . 3)
+                               ("~/Dropbox/new_org/someday.org" :level . 1)
+                               ("~/Dropbox/new_org/tickler.org" :maxlevel . 2))
+          org-log-done 'time
+          org-log-into-drawer t)
+    (setq org-agenda-custom-commands
+          '(("w" "Wetterwelt"
+             (org-agenda-overriding-header "Wetterwelt")
+             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first))))
+
+#+END_SRC
 
 ** Reading email
 
