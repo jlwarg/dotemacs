@@ -84,6 +84,9 @@ The plan is to incrementally turn emacs into an environment that can replace my 
   (global-set-key "\C-ca" 'org-agenda)
   (global-set-key "\C-cc" 'org-capture)
   (global-set-key "\C-cb" 'org-switchb)
+
+  ;; I want to be able to work with clients
+  (server-start)
 #+end_src
 ** Bootstrap
 *** Package Sources
