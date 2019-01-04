@@ -443,6 +443,9 @@ To use code folding, hs-minor-mode has to be activated, hence the last hook belo
 
   (use-package company-anaconda
     :ensure t)
+
+  (use-package docker-tramp
+    :ensure t)
 #+end_src
 
 **** Managing virtual environments
