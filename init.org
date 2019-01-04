@@ -198,69 +198,73 @@ for the time being
 so here goes:
 
 #+begin_src emacs-lisp :tangle yes
-(use-package general :ensure t
-  :config
-  (general-evil-setup t)
-  (setq general-default-keymaps 'evil-normal-state-map)
-  (general-define-key :prefix "SPC"
-		      ;; applications
-		      "a" '(:ignore t :which-key "applications")
-		      "ad" 'deft
-		      "ar" 'deer
-		      ;; buffers
-		      "b" '(:ignore t :which-key "buffers")
-		      "bb" 'switch-to-buffer
-		      "bd" 'kill-this-buffer
-		      ;; files
-		      "f" '(:ignore t :which-key "file")
-		      "fed" '((lambda ()(interactive)
-				(find-file "~/.emacs.d/init.el"))
-			      :which-key "open init.el")
-		      "ff" 'counsel-find-file
-		      "fs" 'save-buffer
+  (use-package general :ensure t
+    :config
+    (general-evil-setup t)
+    (setq general-default-keymaps 'evil-normal-state-map)
+    (general-define-key :prefix "SPC"
+                        ;; applications
+                        "a" '(:ignore t :which-key "applications")
+                        "ad" 'deft
+                        "ar" 'deer
+                        ;; buffers
+                        "b" '(:ignore t :which-key "buffers")
+                        "bb" 'switch-to-buffer
+                        "bd" 'kill-this-buffer
+                        ;; files
+                        "f" '(:ignore t :which-key "file")
+                        "fed" '((lambda ()(interactive)
+                                  (find-file "~/.emacs.d/init.el"))
+                                :which-key "open init.el")
+                        "ff" 'counsel-find-file
+                        "fs" 'save-buffer
 
-		      ;; magit bindings
-		      "g" '(:ignore t :which-key "git")
-		      "gs" '(magit-status :which-key "git status")
+                        ;; magit bindings
+                        "g" '(:ignore t :which-key "git")
+                        "gs" '(magit-status :which-key "git status")
 
-		      ;; notmuch mail
-		      "m" '(:ignore t :which-key "mail")
-		      "mn" 'notmuch-mua-new-mail
-		      "mm" 'notmuch-jump-search
+                        ;; notmuch mail
+                        "m" '(:ignore t :which-key "mail")
+                        "mn" 'notmuch-mua-new-mail
+                        "mm" 'notmuch-jump-search
 
-                      ;; org bindings
-		      "o" '(:ignore t :which-key "org-mode")
-		      "oa" 'org-agenda
-		      "oc" 'org-capture
-		      "oi" '((lambda () (interactive)
-			       (find-file "~/gtd/inbox.org"))
-			     :which-key "open inbox")
-		      "og" '((lambda () (interactive)
-			       (find-file "~/gtd/gtd.org"))
-			     :which-key "open gtd")
-		      "ot" '((lambda () (interactive)
-			       (find-file "~/gtd/tickler.org"))
-			     :which-key "open tickler")
-		      "os" '((lambda () (interactive)
-			       (find-file "~/gtd/someday.org"))
-			     :which-key "open someday")
-		      ;; Redaktionssystem specific stuff
-		      "r" '(:ignore t :which-key "Redaktionssystem")
-		      "ri" '(ww-import-rds-customer :which-key "customer import")
-		      ;; windows
-		      "w" '(:ignore t :which-key "window")
-		      "wh" 'evil-window-left
-		      "wj" 'evil-window-down
-		      "wk" 'evil-window-up
-		      "wl" 'evil-window-right
-		      "ws" 'evil-window-split
-		      "wv" 'evil-window-vsplit
-              )
-  (general-define-key :keymaps 'notmuch-search-mode-map
-                      "d" '(lambda () (interactive)
-                             (notmuch-search-tag '("-inbox" "+deleted" "+killed")))
-                      )
-  )
+                        ;; org bindings
+                        "o" '(:ignore t :which-key "org-mode")
+                        "oa" 'org-agenda
+                        "oc" 'org-capture
+                        "oi" '((lambda () (interactive)
+                                 (find-file "~/gtd/inbox.org"))
+                               :which-key "open inbox")
+                        "og" '((lambda () (interactive)
+                                 (find-file "~/gtd/gtd.org"))
+                               :which-key "open gtd")
+                        "ot" '((lambda () (interactive)
+                                 (find-file "~/gtd/tickler.org"))
+                               :which-key "open tickler")
+                        "os" '((lambda () (interactive)
+                                 (find-file "~/gtd/someday.org"))
+                               :which-key "open someday")
+                        ;; Redaktionssystem specific stuff
+                        "r" '(:ignore t :which-key "Redaktionssystem")
+                        "ri" '(ww-import-rds-customer :which-key "customer import")
+                        ;; searching
+                        "sg" 'personal/google
+                        "sd" 'personal/duckduckgo
+                        "sl" 'personal/lookup-word
+                        ;; windows
+                        "w" '(:ignore t :which-key "window")
+                        "wh" 'evil-window-left
+                        "wj" 'evil-window-down
+                        "wk" 'evil-window-up
+                        "wl" 'evil-window-right
+                        "ws" 'evil-window-split
+                        "wv" 'evil-window-vsplit
+                )
+    (general-define-key :keymaps 'notmuch-search-mode-map
+                        "d" '(lambda () (interactive)
+                               (notmuch-search-tag '("-inbox" "+deleted" "+killed")))
+                        )
+    )
 #+end_src
 
 
@@ -502,4 +506,38 @@ What I'm doing here is [[https://stackoverflow.com/questions/22866733/emacs-disa
 
   (defadvice load-theme (before disable-themes-first activate)
     (disable-all-themes))
+#+END_SRC
+*** Utility functions
+I want to be able to do google/duckduckgo searches and lookup words from emacs.
+Credits go to [[https://batsov.com/articles/2011/11/19/why-emacs/][Bozhidar Batsov]]
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun personal/google ()
+    "Googles a query or region if any."
+    (interactive)
+    (browse-url
+     (concat
+      "http://www.google.com/search?ie=utf-8&oe=utf-8&q="
+      (if mark-active
+          (buffer-substring (region-beginning) (region-end))
+        (read-string "Google: ")))))
+
+  (defun personal/duckduckgo ()
+    "Searches DuckDuckGo with query or region if any."
+    (interactive)
+    (browse-url
+     (concat
+      "http://www.duckduckgo.com/?q="
+      (if mark-active
+          (buffer-substring (region-beginning) (region-end))
+        (read-string "DuckDuckGo: ")))))
+
+  (defun personal/lookup-word ()
+    "Looks up word or region if any on dict.cc"
+    (interactive)
+    (browse-url
+     (concat
+      "http://www.dict.cc/?s="
+      (if mark-active
+          (buffer-substring (region-beginning) (region-end))
+        (read-string "Look up: ")))))
 #+END_SRC
