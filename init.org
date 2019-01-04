@@ -313,6 +313,16 @@ The above turned out to be overwhelming for the time being. Now trying something
     (setq org-return-follows-link t)
     (setq org-todo-keywords
           '((sequence "TODO(t)" "WAITING(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)"))))
+  (use-package evil-org
+    :ensure t
+    :after org
+    :config
+    (add-hook 'org-mode-hook 'evil-org-mode)
+    (add-hook 'evil-org-mode-hook
+              (lambda ()
+                (evil-org-set-key-theme)))
+    (require 'evil-org-agenda)
+    (evil-org-agenda-set-keys))
     (setq org-catch-invisible-edits "smart"
           org-startup-indented t
           org-agenda-files '("~/Dropbox/new_org/inbox.org"
