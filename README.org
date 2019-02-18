@@ -7,7 +7,7 @@ This is my first attempt at an emacs configuration after getting a taste of emac
 *Don't just use my config or parts of it blindly.*
 
 I don't really know what I'm doing with emacs so there are likely some stupid mistakes in this init file.
-I consider this a learning project to tailor my emacs expierience as I go along.
+I consider this a learning project to tailor my emacs experience as I go along.
 
 ** Motivation
    
