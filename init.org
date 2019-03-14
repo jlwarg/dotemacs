@@ -84,6 +84,9 @@ The plan is to incrementally turn emacs into an environment that can replace my 
   (global-set-key "\C-ca" 'org-agenda)
   (global-set-key "\C-cc" 'org-capture)
   (global-set-key "\C-cb" 'org-switchb)
+
+  ;; I want to be able to work with clients
+  (server-start)
 #+end_src
 ** Bootstrap
 *** Package Sources
@@ -250,9 +253,13 @@ so here goes:
                         "r" '(:ignore t :which-key "Redaktionssystem")
                         "ri" '(ww-import-rds-customer :which-key "customer import")
                         ;; searching
+                        "s" '(:ignore t :which-key "search")
                         "sg" 'personal/google
                         "sd" 'personal/duckduckgo
                         "sl" 'personal/lookup-word
+                        ;; tmux interaction
+                        "t" '(:ignore t :which-key "emamux")
+                        "tr" 'emamux:send-region
                         ;; windows
                         "w" '(:ignore t :which-key "window")
                         "wh" 'evil-window-left
@@ -423,11 +430,13 @@ Flycheck mode will be added as a hook for each mode it's supposed to work in as 
 #+end_src
 
 *** Python
-Use ipython for inferior python mode and use simple prompt to avoid gibberish caused by ansi-color codes
+Use ipython for inferior python mode and use simple prompt to avoid gibberish caused by ansi-color codes.
+`python-shell-prompt-block-regexp` needs to be set for multiline-statements to work in inferior-python-mode when company-mode is active. Thanks to `/u/fzmad` in [[https://www.reddit.com/r/emacs/comments/aruxah/python_shell_doesnt_work_with_multiple_lines_of/][this reddit thread]]. Completion still doesn't seem to work, though.
 
 #+begin_src emacs-lisp :tangle yes
   (setq python-shell-interpreter "ipython"
-        python-shell-interpreter-args "-i --simple-prompt --pprint") ;; no ansi color codes on prompt
+        python-shell-interpreter-args "-i --simple-prompt --pprint" ;; no ansi color codes on prompt
+        python-shell-prompt-block-regexp "\\.\\.\\.:?") ;; Ensure functioning multi-line statements
 #+end_src
 
 **** Anaconda Mode
@@ -459,6 +468,9 @@ To use code folding, hs-minor-mode has to be activated, hence the last hook belo
 
   (use-package company-anaconda
     :ensure t)
+
+  (use-package docker-tramp
+    :ensure t)
 #+end_src
 
 **** Managing virtual environments
@@ -487,6 +499,12 @@ I use [[http://quicklisp.org][Quicklisp]], which (as I've been told) spares some
 Emmet mode seems to be the way to go.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package emmet-mode
+    :ensure t)
+#+END_SRC
+*** Tmux interaction
+As long as I haven't figured out how to use inferior processes I'll keep using tmux for python REPLs. Thus I need a way to send text from emacs to a specific tmux pane.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package emamux
     :ensure t)
 #+END_SRC
 ** Customization functions
