@@ -251,6 +251,7 @@ so here goes:
                         "r" '(:ignore t :which-key "Redaktionssystem")
                         "ri" '(ww-import-rds-customer :which-key "customer import")
                         ;; searching
+                        "s" '(:ignore t :which-key "search")
                         "sg" 'personal/google
                         "sd" 'personal/duckduckgo
                         "sl" 'personal/lookup-word
