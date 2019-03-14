@@ -255,6 +255,9 @@ so here goes:
                         "sg" 'personal/google
                         "sd" 'personal/duckduckgo
                         "sl" 'personal/lookup-word
+                        ;; tmux interaction
+                        "t" '(:ignore t :which-key "emamux")
+                        "tr" 'emamux:send-region
                         ;; windows
                         "w" '(:ignore t :which-key "window")
                         "wh" 'evil-window-left
@@ -492,6 +495,12 @@ I use [[http://quicklisp.org][Quicklisp]], which (as I've been told) spares some
 Emmet mode seems to be the way to go.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package emmet-mode
+    :ensure t)
+#+END_SRC
+*** Tmux interaction
+As long as I haven't figured out how to use inferior processes I'll keep using tmux for python REPLs. Thus I need a way to send text from emacs to a specific tmux pane.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package emamux
     :ensure t)
 #+END_SRC
 ** Customization functions
