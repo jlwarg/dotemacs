@@ -428,11 +428,13 @@ Flycheck mode will be added as a hook for each mode it's supposed to work in as 
 #+end_src
 
 *** Python
-Use ipython for inferior python mode and use simple prompt to avoid gibberish caused by ansi-color codes
+Use ipython for inferior python mode and use simple prompt to avoid gibberish caused by ansi-color codes.
+`python-shell-prompt-block-regexp` needs to be set for multiline-statements to work in inferior-python-mode when company-mode is active. Thanks to `/u/fzmad` in [[https://www.reddit.com/r/emacs/comments/aruxah/python_shell_doesnt_work_with_multiple_lines_of/][this reddit thread]]. Completion still doesn't seem to work, though.
 
 #+begin_src emacs-lisp :tangle yes
   (setq python-shell-interpreter "ipython"
-        python-shell-interpreter-args "-i --simple-prompt --pprint") ;; no ansi color codes on prompt
+        python-shell-interpreter-args "-i --simple-prompt --pprint" ;; no ansi color codes on prompt
+        python-shell-prompt-block-regexp "\\.\\.\\.:?") ;; Ensure functioning multi-line statements
 #+end_src
 
 **** Anaconda Mode
