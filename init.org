@@ -295,39 +295,7 @@ so here goes:
    
 Org-Mode shows strange behaviour with evil: If I'm in a graphical frame ('emacsclient -c'), <TAB> is bound to 'org-cycle', if I open the emacsclient in a terminal ('emacsclient -t'), it is bound to 'evil-jump-forward'.
 Solution: Bind #'org-cycle to "TAB" explicitly.
-
-#+begin_src emacs-lisp :tangle no
-  (use-package org
-    :ensure org-plus-contrib
-    :init
-    (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
-    :config
-    (evil-define-key 'normal org-mode-map (kbd "TAB") #'org-cycle) ; TAB is org-cycle, dammit!
-    (setq org-hide-leading-stars 'hidestars)
-    (setq org-return-follows-link t)
-    (setq org-todo-keywords
-          '((sequence "TODO(t)" "NEXT(n)" "WAITING(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)"))))
-    (setq org-catch-invisible-edits "smart"
-          org-startup-indented t
-          org-agenda-files '("~/Dropbox/org/")
-          org-directory "~/Dropbox/org"
-          org-default-notes-file (concat org-directory "/inbox.org")
-          org-capture-templates
-          '(("t" "Todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
-             "* TODO %?\n %i\n %a")
-            ("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/journal.org")
-             "* %?\nEntered on %U\n %i\n %a")
-            ("a" "Appointment" entry (file+headline "~/Dropbox/org/appointments.org" "Termin")
-             "* %?\n%^{Zeitpunkt}T"))
-          org-log-done 'time
-          org-log-into-drawer t)
-    (setq org-agenda-custom-commands
-          '(("D" "Daily Action List"
-             ((agenda "" ((org-agenda-span 1)
-                          (org-agenda-sorting-strategy '((agenda time-up priority-down tag-up )))))))))
-#+end_src
-
-The above turned out to be overwhelming for the time being. Now trying something else inspired by [[https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html][this blog post]].
+Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html][this blog post]].
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package org
