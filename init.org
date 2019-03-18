@@ -5,7 +5,7 @@
 This is my attempt at a useful emacs configuration.
 I'm a long time vim user (~15 years) and finally got my first real taste of Emacs when i heard about Spacemacs.
 I used Spacemacs for about a year before returning to vim. I still think that Spacemacs is a great way for vim users (or probably everyone, it has a "holy mode" after all) to get a taste of emacs.
-For me, it turned out too bloated. I'd still recommend spacemacs to every vim user on the fence about trying emacs
+For me, it turned out too bloated. I'd still recommend spacemacs to every vim user on the fence about trying emacs.
 I like to understand how my tools work and to be able to tinker with them which - at least for me - was much easier to do with (neo)vim.
 Alas, I couldn't find any tool that could replace org mode, so I started using emacs again just for org mode. 
 The plan is to incrementally turn emacs into an environment that can replace my combination of tmux, vim, neomutt and other tools, so I will finally be able to switch to emacs for good. At the moment, I'm not even close...
