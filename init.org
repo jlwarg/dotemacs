@@ -250,16 +250,18 @@ so here goes:
                         "o" '(:ignore t :which-key "org-mode")
                         "oa" 'org-agenda
                         "oc" 'org-capture
-                        "oi" '((lambda () (interactive)
+                        "o," 'org-insert-structure-template
+                        "of" '(:ignore t :which-key "org files")
+                        "ofi" '((lambda () (interactive)
                                  (find-file "~/gtd/inbox.org"))
                                :which-key "open inbox")
-                        "og" '((lambda () (interactive)
+                        "ofg" '((lambda () (interactive)
                                  (find-file "~/gtd/gtd.org"))
                                :which-key "open gtd")
-                        "ot" '((lambda () (interactive)
+                        "oft" '((lambda () (interactive)
                                  (find-file "~/gtd/tickler.org"))
                                :which-key "open tickler")
-                        "os" '((lambda () (interactive)
+                        "ofs" '((lambda () (interactive)
                                  (find-file "~/gtd/someday.org"))
                                :which-key "open someday")
                         ;; Projectile
