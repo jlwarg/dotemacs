@@ -213,7 +213,9 @@ so here goes:
     :config
     (general-evil-setup t)
     (setq general-default-keymaps 'evil-normal-state-map)
-    (general-define-key :prefix "SPC"
+    (general-define-key
+     :keymaps '(normal visual)
+     :prefix "SPC"
                         ;; applications
                         "a" '(:ignore t :which-key "applications")
                         "ad" 'deft
