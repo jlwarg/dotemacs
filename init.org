@@ -345,6 +345,29 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
 
 #+END_SRC
 
+*** Capture from everywhere
+org-capture is one of the most importat features of org mode and the reason why I want to switch to emacs completely in the long run. To be able to invoke org-capture from outside of emacs, the following code is used. Found it in [[https://www.reddit.com/r/emacs/comments/6g6okf/workflow_for_using_orgmode/][this reddit thread]].
+#+begin_src emacs-lisp :tangle yes
+  (defun my/call-org-capture-in-new-window ()
+    (org-capture)
+    (delete-other-windows)
+    (delete-other-windows)
+    (setq-local kill-buffer-hook (lambda () (delete-frame))))
+#+end_src
+
+Now bind a key on Window manager to the following shell script:
+
+#+begin_src shell :tangle no
+  #!/bin/sh
+  currentWindow=$(xprop -id $(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}') | awk '/WM_CLASS\(STRING\)/{print $NF}')
+
+  if [[ $currentWindow == '"Emacs"' ]]; then
+      emacsclient --eval "(call-interactively #'org-capture)"
+  else
+      emacsclient -c --eval '(my/call-org-capture-in-new-window)'
+  fi
+#+end_src
+This will do the right thing whether you're in emacs or not at the time.
 ** Reading email
 
 Notmuch is installed via the host's package manager. We need compatibility and notmuch.el comes with the notmuch installation. So just use it.
