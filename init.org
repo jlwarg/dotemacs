@@ -148,6 +148,8 @@ Although I don't want to use spacemacs, I really like its appearance, so:
    (use-package evil-collection
      :after evil
      :ensure t
+     :init
+     (setq evil-want-keybinding nil)
      :config
      (evil-collection-init))
  #+END_SRC
