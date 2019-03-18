@@ -198,6 +198,12 @@ for the time being
 
 #+end_src
 
+Now that I use projectile I want the same comfortable search features I got used to in projectile.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package counsel-projectile
+    :ensure t)
+#+END_SRC
 ** Key bindings
 [[https://github.com/noctuid/general.el][General.el]] looks like the best way to resemble something like the vim <Leader>,
 so here goes:
@@ -256,6 +262,8 @@ so here goes:
                         "os" '((lambda () (interactive)
                                  (find-file "~/gtd/someday.org"))
                                :which-key "open someday")
+                        ;; Projectile
+                        "p" '(projectile-command-map :which-key "Projectile")
                         ;; Redaktionssystem specific stuff
                         "r" '(:ignore t :which-key "Redaktionssystem")
                         "ri" '(ww-import-rds-customer :which-key "customer import")
@@ -282,7 +290,6 @@ so here goes:
                         )
     )
 #+end_src
-
 
 ** Org Mode
    
@@ -347,6 +354,7 @@ The above turned out to be overwhelming for the time being. Now trying something
           org-startup-indented t
           org-agenda-files '("~/Dropbox/new_org/inbox.org"
                              "~/Dropbox/new_org/gtd.org"
+                             "~/Dropbox/new_org/appointments.org"
                              "~/Dropbox/new_org/tickler.org")
           org-directory "~/Dropbox/new_org"
           org-default-notes-file (concat org-directory "/inbox.org")
@@ -377,7 +385,6 @@ Notmuch is installed via the host's package manager. We need compatibility and n
   (require 'notmuch)
   (setq message-kill-buffer-on-exit t) ; kill the message buffer after sending mail
 #+end_src
-
 
 ** Programming
 *** Code folding   
@@ -441,6 +448,16 @@ I'm used to [[https://github.com/scrooloose/nerdcommenter][NERD Commenter]] in v
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package evil-nerd-commenter
     :ensure t)
+#+END_SRC
+*** Project management
+Emacs has a habit of changing `pwd` according to the path of the current file in the buffer. That's ok and probably even better than in vim which just stays in the directory you opened it in unless you explicitly change it. OTOH, this way you just open an instance of vim in the root directory of each project you want to work on (e.g. in a tmux session) and you'r all set. Emacs' philosophy is different here, so some basic project management functions seem to be called for.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package projectile
+    :ensure t
+    :config
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (projectile-mode +1)
+    (counsel-projectile-mode +1))
 #+END_SRC
 *** Python
 Use ipython for inferior python mode and use simple prompt to avoid gibberish caused by ansi-color codes.
