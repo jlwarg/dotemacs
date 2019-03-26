@@ -336,6 +336,9 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
              "* TODO %i%?")
             ("T" "Tickler" entry
              (file+headline "~/Dropbox/new_org/tickler.org" "Tickler")
+             "* %i%? \n %U")
+            ("n" "Note" entry
+             (file+headline "~/Dropbox/new_org/notes.org" "Notes")
              "* %i%? \n %U"))
           org-refile-targets '(("~/Dropbox/new_org/gtd.org" :maxlevel . 3)
                                ("~/Dropbox/new_org/someday.org" :level . 1)
