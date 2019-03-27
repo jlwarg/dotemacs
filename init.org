@@ -5,7 +5,7 @@
 This is my attempt at a useful emacs configuration.
 I'm a long time vim user (~15 years) and finally got my first real taste of Emacs when i heard about Spacemacs.
 I used Spacemacs for about a year before returning to vim. I still think that Spacemacs is a great way for vim users (or probably everyone, it has a "holy mode" after all) to get a taste of emacs.
-For me, it turned out too bloated. I'd still recommend spacemacs to every vim user on the fence about trying emacs
+For me, it turned out too bloated. I'd still recommend spacemacs to every vim user on the fence about trying emacs.
 I like to understand how my tools work and to be able to tinker with them which - at least for me - was much easier to do with (neo)vim.
 Alas, I couldn't find any tool that could replace org mode, so I started using emacs again just for org mode. 
 The plan is to incrementally turn emacs into an environment that can replace my combination of tmux, vim, neomutt and other tools, so I will finally be able to switch to emacs for good. At the moment, I'm not even close...
@@ -150,6 +150,8 @@ Although I don't want to use spacemacs, I really like its appearance, so:
    (use-package evil-collection
      :after evil
      :ensure t
+     :init
+     (setq evil-want-keybinding nil)
      :config
      (evil-collection-init))
  #+END_SRC
@@ -198,6 +200,12 @@ for the time being
 
 #+end_src
 
+Now that I use projectile I want the same comfortable search features I got used to in projectile.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package counsel-projectile
+    :ensure t)
+#+END_SRC
 ** Key bindings
 [[https://github.com/noctuid/general.el][General.el]] looks like the best way to resemble something like the vim <Leader>,
 so here goes:
@@ -207,7 +215,9 @@ so here goes:
     :config
     (general-evil-setup t)
     (setq general-default-keymaps 'evil-normal-state-map)
-    (general-define-key :prefix "SPC"
+    (general-define-key
+     :keymaps '(normal visual)
+     :prefix "SPC"
                         ;; applications
                         "a" '(:ignore t :which-key "applications")
                         "ad" 'deft
@@ -216,6 +226,13 @@ so here goes:
                         "b" '(:ignore t :which-key "buffers")
                         "bb" 'switch-to-buffer
                         "bd" 'kill-this-buffer
+                        ;; code commenting
+                        "c" '(:ignore t :which-key "commenting")
+                        "ci" 'evilnc-comment-or-uncomment-lines
+                        "cl" 'evilnc-quick-comment-or-uncomment-to-the-line
+                        "cc" 'evilnc-copy-and-comment-lines
+                        "cp" 'evilnc-comment-or-uncomment-paragraphs
+                        "cr" 'comment-or-uncomment-region
                         ;; files
                         "f" '(:ignore t :which-key "file")
                         "fed" '((lambda ()(interactive)
@@ -237,18 +254,22 @@ so here goes:
                         "o" '(:ignore t :which-key "org-mode")
                         "oa" 'org-agenda
                         "oc" 'org-capture
-                        "oi" '((lambda () (interactive)
+                        "o," 'org-insert-structure-template
+                        "of" '(:ignore t :which-key "org files")
+                        "ofi" '((lambda () (interactive)
                                  (find-file "~/gtd/inbox.org"))
                                :which-key "open inbox")
-                        "og" '((lambda () (interactive)
+                        "ofg" '((lambda () (interactive)
                                  (find-file "~/gtd/gtd.org"))
                                :which-key "open gtd")
-                        "ot" '((lambda () (interactive)
+                        "oft" '((lambda () (interactive)
                                  (find-file "~/gtd/tickler.org"))
                                :which-key "open tickler")
-                        "os" '((lambda () (interactive)
+                        "ofs" '((lambda () (interactive)
                                  (find-file "~/gtd/someday.org"))
                                :which-key "open someday")
+                        ;; Projectile
+                        "p" '(projectile-command-map :which-key "Projectile")
                         ;; Redaktionssystem specific stuff
                         "r" '(:ignore t :which-key "Redaktionssystem")
                         "ri" '(ww-import-rds-customer :which-key "customer import")
@@ -276,44 +297,11 @@ so here goes:
     )
 #+end_src
 
-
 ** Org Mode
    
 Org-Mode shows strange behaviour with evil: If I'm in a graphical frame ('emacsclient -c'), <TAB> is bound to 'org-cycle', if I open the emacsclient in a terminal ('emacsclient -t'), it is bound to 'evil-jump-forward'.
 Solution: Bind #'org-cycle to "TAB" explicitly.
-
-#+begin_src emacs-lisp :tangle no
-  (use-package org
-    :ensure org-plus-contrib
-    :init
-    (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
-    :config
-    (evil-define-key 'normal org-mode-map (kbd "TAB") #'org-cycle) ; TAB is org-cycle, dammit!
-    (setq org-hide-leading-stars 'hidestars)
-    (setq org-return-follows-link t)
-    (setq org-todo-keywords
-          '((sequence "TODO(t)" "NEXT(n)" "WAITING(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)"))))
-    (setq org-catch-invisible-edits "smart"
-          org-startup-indented t
-          org-agenda-files '("~/Dropbox/org/")
-          org-directory "~/Dropbox/org"
-          org-default-notes-file (concat org-directory "/inbox.org")
-          org-capture-templates
-          '(("t" "Todo" entry (file+headline "~/Dropbox/org/inbox.org" "Tasks")
-             "* TODO %?\n %i\n %a")
-            ("j" "Journal" entry (file+olp+datetree "~/Dropbox/org/journal.org")
-             "* %?\nEntered on %U\n %i\n %a")
-            ("a" "Appointment" entry (file+headline "~/Dropbox/org/appointments.org" "Termin")
-             "* %?\n%^{Zeitpunkt}T"))
-          org-log-done 'time
-          org-log-into-drawer t)
-    (setq org-agenda-custom-commands
-          '(("D" "Daily Action List"
-             ((agenda "" ((org-agenda-span 1)
-                          (org-agenda-sorting-strategy '((agenda time-up priority-down tag-up )))))))))
-#+end_src
-
-The above turned out to be overwhelming for the time being. Now trying something else inspired by [[https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html][this blog post]].
+Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html][this blog post]].
 
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package org
@@ -340,6 +328,7 @@ The above turned out to be overwhelming for the time being. Now trying something
           org-startup-indented t
           org-agenda-files '("~/Dropbox/new_org/inbox.org"
                              "~/Dropbox/new_org/gtd.org"
+                             "~/Dropbox/new_org/appointments.org"
                              "~/Dropbox/new_org/tickler.org")
           org-directory "~/Dropbox/new_org"
           org-default-notes-file (concat org-directory "/inbox.org")
@@ -349,6 +338,9 @@ The above turned out to be overwhelming for the time being. Now trying something
              "* TODO %i%?")
             ("T" "Tickler" entry
              (file+headline "~/Dropbox/new_org/tickler.org" "Tickler")
+             "* %i%? \n %U")
+            ("n" "Note" entry
+             (file+headline "~/Dropbox/new_org/notes.org" "Notes")
              "* %i%? \n %U"))
           org-refile-targets '(("~/Dropbox/new_org/gtd.org" :maxlevel . 3)
                                ("~/Dropbox/new_org/someday.org" :level . 1)
@@ -362,6 +354,29 @@ The above turned out to be overwhelming for the time being. Now trying something
 
 #+END_SRC
 
+*** Capture from everywhere
+org-capture is one of the most importat features of org mode and the reason why I want to switch to emacs completely in the long run. To be able to invoke org-capture from outside of emacs, the following code is used. Found it in [[https://www.reddit.com/r/emacs/comments/6g6okf/workflow_for_using_orgmode/][this reddit thread]].
+#+begin_src emacs-lisp :tangle yes
+  (defun my/call-org-capture-in-new-window ()
+    (org-capture)
+    (delete-other-windows)
+    (delete-other-windows)
+    (setq-local kill-buffer-hook (lambda () (delete-frame))))
+#+end_src
+
+Now bind a key on Window manager to the following shell script:
+
+#+begin_src shell :tangle no
+  #!/bin/sh
+  currentWindow=$(xprop -id $(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}') | awk '/WM_CLASS\(STRING\)/{print $NF}')
+
+  if [[ $currentWindow == '"Emacs"' ]]; then
+      emacsclient --eval "(call-interactively #'org-capture)"
+  else
+      emacsclient -c --eval '(my/call-org-capture-in-new-window)'
+  fi
+#+end_src
+This will do the right thing whether you're in emacs or not at the time.
 ** Reading email
 
 Notmuch is installed via the host's package manager. We need compatibility and notmuch.el comes with the notmuch installation. So just use it.
@@ -370,7 +385,6 @@ Notmuch is installed via the host's package manager. We need compatibility and n
   (require 'notmuch)
   (setq message-kill-buffer-on-exit t) ; kill the message buffer after sending mail
 #+end_src
-
 
 ** Programming
 *** Code folding   
@@ -429,6 +443,22 @@ Flycheck mode will be added as a hook for each mode it's supposed to work in as 
     :ensure t)
 #+end_src
 
+*** Commenting
+I'm used to [[https://github.com/scrooloose/nerdcommenter][NERD Commenter]] in vim, so I'll need a replacement. [[https://github.com/redguardtoo/evil-nerd-commenter][evil-nerd-commenter]] seems to be exactly what I need. See above (C-s) for keybindings.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package evil-nerd-commenter
+    :ensure t)
+#+END_SRC
+*** Project management
+Emacs has a habit of changing `pwd` according to the path of the current file in the buffer. That's ok and probably even better than in vim which just stays in the directory you opened it in unless you explicitly change it. OTOH, this way you just open an instance of vim in the root directory of each project you want to work on (e.g. in a tmux session) and you'r all set. Emacs' philosophy is different here, so some basic project management functions seem to be called for.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package projectile
+    :ensure t
+    :config
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (projectile-mode +1)
+    (counsel-projectile-mode +1))
+#+END_SRC
 *** Python
 Use ipython for inferior python mode and use simple prompt to avoid gibberish caused by ansi-color codes.
 `python-shell-prompt-block-regexp` needs to be set for multiline-statements to work in inferior-python-mode when company-mode is active. Thanks to `/u/fzmad` in [[https://www.reddit.com/r/emacs/comments/aruxah/python_shell_doesnt_work_with_multiple_lines_of/][this reddit thread]]. Completion still doesn't seem to work, though.
@@ -484,6 +514,53 @@ To use code folding, hs-minor-mode has to be activated, hence the last hook belo
   (pyvenv-tracking-mode 1))
 #+end_src
 
+*** Javascript
+For a start, just use the stuff found [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html][here]] (and use use-package)
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package js2-mode
+    :ensure t
+    :init
+    (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+    ;; Better imenu (whatever that means)
+    (add-hook 'js-mode-hook #'js2-imenu-extras-mode))
+#+END_SRC
+Refactoring stuff recommended by my source of inspiration (see above)
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package js2-refactor
+    :ensure t
+    :init
+    (add-hook 'js2-mode-hook #'js2-refactor-mode)
+    (js2r-add-keybindings-with-prefix "C-c C-r")
+    (define-key js2-mode-map (kbd "C-k") #'js2r-kill))
+
+  (use-package xref-js2
+    :ensure t
+    :init
+    ;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+    ;; unbind it.
+    (define-key js-mode-map (kbd "M-.") nil)
+    (add-hook 'js-mode-hook (lambda ()
+                              (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
+#+END_SRC
+The following is for auto-completion and REPL. Requires installation of `tern`:
+#+BEGIN_SRC shell
+  $ sudo npm install -g tern
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package company-tern
+    :ensure t
+    :init
+    (add-to-list 'company-backends 'company-tern)
+    (add-hook 'js2-mode-hook (lambda ()
+                               (tern-mode)
+                               (company-mode))) ;; is company mode global?
+    :config
+    ;; Disable completion keybindings, as we use xref-js2 instead
+    (define-key tern-mode-keymap (kbd "M-.") nil)
+    (define-key tern-mode-keymap (kbd "M-,") nil))
+
+#+END_SRC
 *** Common Lisp
 I use [[http://quicklisp.org][Quicklisp]], which (as I've been told) spares some hassle setting up slime. Otoh, the slime version that came with it is buggy when used with emacs 26.1 (which I use). So I just put a newer slime version in the quicklisp slime directory and it seems to work so far.
 
@@ -501,6 +578,19 @@ Emmet mode seems to be the way to go.
   (use-package emmet-mode
     :ensure t)
 #+END_SRC
+*** GraphQL
+I plan to write some notes about my learning process for GraphQL in orgmode, so I need this for inline code
+#+begin_src emacs-lisp :tangle yes
+  (use-package graphql-mode
+    :ensure t)
+#+end_src
+which leads to...
+*** JSON
+GraphQL APIs respond with json, so...
+#+begin_src emacs-lisp :tangle yes
+  (use-package json-mode
+    :ensure t)
+#+end_src
 *** Tmux interaction
 As long as I haven't figured out how to use inferior processes I'll keep using tmux for python REPLs. Thus I need a way to send text from emacs to a specific tmux pane.
 #+BEGIN_SRC emacs-lisp :tangle yes
