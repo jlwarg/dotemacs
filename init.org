@@ -139,6 +139,7 @@ Although I don't want to use spacemacs, I really like its appearance, so:
      :ensure t ;; install the evil package if not installed
      :init
      (setq evil-want-integration nil)
+     (setq evil-want-keybinding nil)
      :config ;; tweak evil after loading it
      (evil-mode 1))
  #+end_src
@@ -148,8 +149,6 @@ Although I don't want to use spacemacs, I really like its appearance, so:
    (use-package evil-collection
      :after evil
      :ensure t
-     :init
-     (setq evil-want-keybinding nil)
      :config
      (evil-collection-init))
  #+END_SRC
