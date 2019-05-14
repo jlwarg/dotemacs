@@ -321,7 +321,10 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
     (setq org-hide-leading-stars 'hidestars)
     (setq org-return-follows-link t)
     (setq org-todo-keywords
-          '((sequence "TODO(t)" "WAITING(w@/!)" "|" "DONE(d!)" "CANCELLED(c@)"))))
+          '((sequence "TODO(t)" "WAITING(w@/!)" "|" "DONE(d:w::!)" "CANCELLED(c@)")))
+    (org-babel-do-load-languages 'org-babel-load-languages '((python . t)
+                                                             (shell . t))))
+                                                             
   (use-package evil-org
     :ensure t
     :after org
