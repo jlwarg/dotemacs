@@ -397,6 +397,17 @@ Notmuch is installed via the host's package manager. We need compatibility and n
   (setq message-kill-buffer-on-exit t) ; kill the message buffer after sending mail
 #+end_src
 
+** Snippets
+I want to get my feet wet with snippets, inspired by howardism.org
+#+begin_src emacs-lisp :tangle yes
+  (use-package yasnippet
+    :ensure t
+    :init
+    (yas-global-mode 1))
+
+  (use-package yasnippet-snippets
+    :ensure t) ;; A set of snippets
+#+end_src
 ** Programming
 *** Code folding   
 Try Origami..
