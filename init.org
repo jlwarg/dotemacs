@@ -330,8 +330,11 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
     (setq org-todo-keywords
           '((sequence "TODO(t)" "WAITING(w@/!)" "|" "DONE(d:w::!)" "CANCELLED(c@)")))
     (org-babel-do-load-languages 'org-babel-load-languages '((python . t)
-                                                             (shell . t))))
-                                                             
+                                                             (shell . t)
+                                                             (sql . t)
+                                                             (js . t)
+                                                             (dot .t))))
+
   (use-package evil-org
     :ensure t
     :after org
