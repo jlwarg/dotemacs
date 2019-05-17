@@ -175,42 +175,21 @@ Although I don't want to use spacemacs, I really like its appearance, so:
           which-key-idle-delay 0.01))
 #+end_src
 
-** Fuzzy search
-
-Ivy and counsel are supposed to be more lightweight than helm, so I'll use those
-for the time being
+** Helm
+I'm finally ready to try out helm after experiencing the limits of ivy and
+counsel when searching for refile targets in org-mode. So here we go:
 
 #+begin_src emacs-lisp :tangle yes
-;; initial ivy and counsel configuration from:
-;; https://sam217pa.github.io/2016/08/30/how-to-make-your-own-spacemacs/
-(use-package ivy
-  :ensure t
-  :diminish (ivy-mode . "") ; don't display ivy in modeline
-  :init (ivy-mode 1)        ; enable ivy globally at startup
-  :bind (:map ivy-mode-map  ; bind in the ivy buffer
-        ("C-'" . ivy-avy))  ; C-' to ivy-avy
-  :config
-  (setq ivy-use-virtual-buffers t)  ; extend searching to bookmarks and ...
-  (setq ivy-height 20)              ; set height of the ivy window
-  (setq ivy-count-format "(%d%d) ") ; count format, from the ivy help package
- )
-
-(use-package counsel :ensure t
-  :bind                            ; load counsel when pressed
-  (("M-x" . counsel-M-x)           ; M-x use counsel
-   ("C-x C-f" . counsel-find-file) ; C-x C-f use counsel-find-file
-   ("C-x C-r" . counsel-recentf)   ; search recently edited files
-  )
-)
+  (use-package helm
+    :ensure t
+    :bind
+    (("M-x" . helm-M-x)
+     ("C-x r b" . helm-filtered-bookmarks)
+     ("C-x C-f" . helm-find-files))
+    :config
+    (helm-mode 1))
 
 #+end_src
-
-Now that I use projectile I want the same comfortable search features I got used to in projectile.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package counsel-projectile
-    :ensure t)
-#+END_SRC
 ** Key bindings
 [[https://github.com/noctuid/general.el][General.el]] looks like the best way to resemble something like the vim <Leader>,
 so here goes:
@@ -243,7 +222,7 @@ so here goes:
                         "fed" '((lambda ()(interactive)
                                   (find-file "~/.emacs.d/init.el"))
                                 :which-key "open init.el")
-                        "ff" 'counsel-find-file
+                        "ff" 'helm-find-files
                         "fs" 'save-buffer
 
                         ;; magit bindings
@@ -483,7 +462,6 @@ Emacs has a habit of changing `pwd` according to the path of the current file in
     :config
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
     (projectile-mode +1)
-    (counsel-projectile-mode +1))
 #+END_SRC
 *** Python
 Use ipython for inferior python mode and use simple prompt to avoid gibberish caused by ansi-color codes.
