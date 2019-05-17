@@ -1,3 +1,6 @@
+#+TITLE: My Emacs Configuration
+#+NAME: Jochen Luig
+#+EMAIL: jochen.luig@gmail.com
 #+PROPERTY: tangle "~/.emacs.d/init.el"
 
 * My Emacs configuration
