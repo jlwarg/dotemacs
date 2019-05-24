@@ -326,10 +326,7 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
     (evil-org-agenda-set-keys))
     (setq org-catch-invisible-edits "smart"
           org-startup-indented t
-          org-agenda-files '("~/Dropbox/new_org/inbox.org"
-                             "~/Dropbox/new_org/gtd.org"
-                             "~/Dropbox/new_org/appointments.org"
-                             "~/Dropbox/new_org/tickler.org")
+          org-agenda-files '("~/Dropbox/new_org/")
           org-directory "~/Dropbox/new_org"
           org-default-notes-file (concat org-directory "/inbox.org")
           org-capture-templates
@@ -342,9 +339,7 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
             ("n" "Note" entry
              (file+headline "~/Dropbox/new_org/notes.org" "Notes")
              "* %i%? \n %U"))
-          org-refile-targets '(("~/Dropbox/new_org/gtd.org" :maxlevel . 3)
-                               ("~/Dropbox/new_org/someday.org" :level . 1)
-                               ("~/Dropbox/new_org/tickler.org" :maxlevel . 2))
+          org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
           org-log-done 'time
           org-log-into-drawer t)
     (setq org-agenda-custom-commands
@@ -392,7 +387,12 @@ I want to get my feet wet with snippets, inspired by howardism.org
   (use-package yasnippet
     :ensure t
     :init
-    (yas-global-mode 1))
+    (yas-global-mode 1)
+    :config
+    (define-key yas-minor-mode-map (kbd "<tab>") nil) ;; <tab> is too important e.g. in orgmode
+    (define-key yas-minor-mode-map (kbd "TAB") nil)   ;; thus yields unexpected behaviour
+    (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand)
+    (define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand))
 
   (use-package yasnippet-snippets
     :ensure t) ;; A set of snippets
@@ -695,3 +695,23 @@ following one will exit eshell and close the window.
     (eshell-send-input)
     (delete-window))
 #+END_SRC
+*** Auto Insert
+For some files, I want to have some boilerplate inserted on creation, e.g. org
+files should have Title, Author and email headers.
+Most of this is stolen from [[http://www.howardism.org/Technical/Emacs/templates-tutorial.html][Howard Abrams]].
+
+#+begin_src emacs-lisp :tangle yes
+  (defun jl/autoinsert-yas-expand()
+    "Replace text in yasnippet template"
+    (yas-expand-snippet (buffer-string) (point-min)(point-max)))
+
+  (use-package autoinsert
+    :init
+    ;; Don't want to be prompted before insertion
+    (setq auto-insert-query nil)
+    (setq auto-insert-directory (locate-user-emacs-file "templates"))
+    (add-hook 'find-file-hook 'auto-insert)
+    (auto-insert-mode 1)
+    :config
+    (setq auto-insert-alist '(("\\.org" . [ "default-org.org" jl/autoinsert-yas-expand ]))))
+#+end_src
