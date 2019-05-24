@@ -468,7 +468,7 @@ Emacs has a habit of changing `pwd` according to the path of the current file in
     :ensure t
     :config
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-    (projectile-mode +1)
+    (projectile-mode +1))
 #+END_SRC
 *** Python
 Use ipython for inferior python mode and use simple prompt to avoid gibberish caused by ansi-color codes.
