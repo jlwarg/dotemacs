@@ -326,7 +326,8 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
     (evil-org-agenda-set-keys))
     (setq org-catch-invisible-edits "smart"
           org-startup-indented t
-          org-agenda-files '("~/Dropbox/new_org/")
+          org-agenda-files '("~/Dropbox/new_org/"
+                             "~/org/")
           org-directory "~/Dropbox/new_org"
           org-default-notes-file (concat org-directory "/inbox.org")
           org-capture-templates
