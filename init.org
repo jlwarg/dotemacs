@@ -369,6 +369,7 @@ Now bind a key on Window manager to the following shell script:
   fi
 #+end_src
 This will do the right thing whether you're in emacs or not at the time.
+
 ** Reading email
 
 Notmuch is installed via the host's package manager. We need compatibility and notmuch.el comes with the notmuch installation. So just use it.
@@ -654,6 +655,18 @@ Credits go to [[https://batsov.com/articles/2011/11/19/why-emacs/][Bozhidar Bats
       (if mark-active
           (buffer-substring (region-beginning) (region-end))
         (read-string "Look up: ")))))
+#+END_SRC
+*** Dired
+Some enhancements for dired
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (defun jlwarg/dired-open-file ()
+    "In dired, open the
+   file named on this line."
+    (interactive)
+    (let* ((file (dired-get-filename nil t)))
+      (call-process "xdg-open" nil 0 nil file)))
+
+  (define-key dired-mode-map (kbd "C-c o") 'jlwarg/dired-open-file)
 #+END_SRC
 *** Eshell
 Inspired by [[http://www.howardism.org/Technical/Emacs/eshell-fun.html][this article]] I think I should try using =eshell= to get closer to my
