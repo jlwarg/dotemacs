@@ -327,15 +327,12 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
           org-directory "~/Dropbox/new_org"
           org-default-notes-file (concat org-directory "/inbox.org")
           org-capture-templates
-          '(("t" "Todo [inbox]" entry
-             (file+headline "~/Dropbox/new_org/inbox.org" "Tasks")
-             "* TODO %i%?")
-            ("T" "Tickler" entry
-             (file+headline "~/Dropbox/new_org/tickler.org" "Tickler")
-             "* %i%? \n %U")
-            ("n" "Note" entry
-             (file+headline "~/Dropbox/new_org/notes.org" "Notes")
-             "* %i%? \n %U"))
+          '(("i" "Inbox" entry
+             (file "~/Dropbox/new_org/inbox.org")
+             "* %i%?")
+            ("j" "Journal Entry" entry
+             (file+olp+datetree "~/Dropbox/new_org/journal.org")
+             "* %i%?"))
           org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
           org-log-done 'time
           org-log-into-drawer t)
