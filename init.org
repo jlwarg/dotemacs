@@ -1,11 +1,7 @@
 #+TITLE: Emacs Configuration File
 #+AUTHOR: Jochen Luig
 #+EMAIL: jochen.luig@gmail.com
-#+PROPERTY: results silent
-#+PROPERTY: header-args:sh :tangle no
 #+PROPERTY: tangle "~/.emacs.d/init.el"
-#+PROPERTY: eval no-export
-#+PROPERTY: comments org
 
 * My Emacs configuration
   
