@@ -298,6 +298,7 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
     (add-hook 'org-mode-hook '(lambda () (progn
                                            (set-fill-column 80)
                                            (auto-fill-mode 1))))
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
     :config
     (evil-define-key 'normal org-mode-map (kbd "TAB") #'org-cycle) ; TAB is org-cycle, dammit!
     (setq org-hide-leading-stars 'hidestars)
@@ -340,7 +341,9 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
           '(("w" "Wetterwelt"
              (org-agenda-overriding-header "Wetterwelt")
              (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first))))
-
+  ;; make org files look nicer
+  (use-package org-bullets
+    :ensure t)
 #+END_SRC
 
 *** Capture from everywhere
