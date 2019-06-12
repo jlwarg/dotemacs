@@ -395,6 +395,14 @@ I want to get my feet wet with snippets, inspired by howardism.org
   (use-package yasnippet-snippets
     :ensure t) ;; A set of snippets
 #+end_src
+
+** Dired
+#+begin_src emacs-lisp :tangle yes
+  (use-package dired
+    :ensure nil
+    :custom
+    (dired-listing-switches "-aBhl --group-directories-first"))
+#+end_src
 ** Programming
 *** Code folding   
 Try Origami..
