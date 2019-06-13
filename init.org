@@ -335,7 +335,13 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
              "* %i%?")
             ("j" "Journal Entry" entry
              (file+olp+datetree "~/Dropbox/new_org/journal.org")
-             "* %i%?"))
+             "* %i%?")
+            ("f" "Food log" item
+             (file+olp+datetree "~/Dropbox/new_org/food.org" "Nahrung")
+             "%U %^{Essen}\n%?")
+            ("p" "Poop log" item
+             (file+olp+datetree "~/Dropbox/new_org/food.org" "Stuhlgang")
+             "%U %^{Konsistenz}, %^{Ätzend}\n%?"))
           org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
           org-log-done 'time
           org-log-into-drawer t)
