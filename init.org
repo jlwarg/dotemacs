@@ -656,6 +656,49 @@ Credits go to [[https://batsov.com/articles/2011/11/19/why-emacs/][Bozhidar Bats
           (buffer-substring (region-beginning) (region-end))
         (read-string "Look up: ")))))
 #+END_SRC
+
+The following ones are for time management in orgmode. I maintain an org-table
+in which I put my arrival and leave time as well as breaks for each workday and
+have it calculate my daily work time.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+   (defun jlwarg/total-minutes (time-string)
+     "Return minutes in a given time string of the form HH:MM"
+     (if (string= time-string "")
+         0
+       (-let [(hours minutes) (split-string time-string ":")]
+         (+ (* 60 (string-to-number hours)) (string-to-number minutes)))))
+
+   (defun jlwarg/day-work-time (come go break home)
+     "calculate a day's work time"
+     (format "%0.2f"
+             (/
+              (-
+               (+ (- (jlwarg/total-minutes go) (jlwarg/total-minutes come))
+                      (* (string-to-number home) 60))
+                   (string-to-number break))
+
+              60.0)))
+
+   (defun jlwarg/weekend-p (timestamp)
+     "Determine if an org timestamp is on a weekend"
+     (or (string-match (regexp-quote "Sat") timestamp)
+         (string-match (regexp-quote "Sun") timestamp)))
+
+  (defun jlwarg/workdays (timestamps markers)
+    "calculate workdays"
+    (let ((both (-zip timestamps markers)))
+      (length (seq-filter '(lambda (item)
+                             (and
+                              (not (jlwarg/weekend-p (car item)))
+                              (string= "" (cdr item)))) both))))
+
+  (defun jlwarg/workdays-til-today (timestamps markers)
+    "count workdays of current month until today"
+    (let ((current-day (string-to-number (format-time-string "%d"))))
+      (jlwarg/workdays (seq-take timestamps current-day)
+                       (seq-take markers current-day))))
+#+END_SRC
 *** Dired
 Some enhancements for dired
 #+BEGIN_SRC emacs-lisp :tangle yes
