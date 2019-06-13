@@ -310,7 +310,8 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
                                                              (shell . t)
                                                              (sql . t)
                                                              (js . t)
-                                                             (dot .t))))
+                                                             (dot .t)
+                                                             (ditaa . t))))
 
   (use-package evil-org
     :ensure t
