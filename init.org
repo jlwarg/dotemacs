@@ -97,7 +97,8 @@ blindly.*
   (global-set-key "\C-cb" 'org-switchb)
 
   ;; I want to be able to work with clients
-  (server-start)
+  (when (not (daemonp))
+    (server-start))
 #+end_src
 ** Bootstrap
 *** Package Sources
