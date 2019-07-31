@@ -42,7 +42,9 @@ blindly.*
   (setq browse-url-browser-function 'browse-url-xdg-open) ; use system's default browser for urls
   (setq tramp-default-method "ssh")
   (add-to-list 'default-frame-alist '(font . "Source Code Pro 10"))
-  (setq initial-scratch-message ";; Welcome to Emacs")
+  (setq initial-scratch-message ";; Everyone is scared that if they had traveled back in time they could do something very small
+;; that would change their whole life. But no one thinks that doing something very small
+;; in the present will have a huge impact on their future.")
 
   ;; send mail with msmtp
   (setq sendmail-program "/usr/bin/msmtp")
