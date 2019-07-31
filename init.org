@@ -247,7 +247,7 @@ so here goes:
                         "o," 'org-insert-structure-template
                         "of" '(:ignore t :which-key "org files")
                         "ofi" '((lambda () (interactive)
-                                 (find-file "~/gtd/inbox.org"))
+                                 (find-file "~/Dropbox/new_org/inbox.org"))
                                :which-key "open inbox")
                         "ofg" '((lambda () (interactive)
                                  (find-file "~/gtd/gtd.org"))
@@ -324,7 +324,7 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
               (lambda ()
                 (evil-org-set-key-theme)))
     (require 'evil-org-agenda)
-    (evil-org-agenda-set-keys))
+    (evil-org-agenda-set-keys)
     (setq org-catch-invisible-edits "smart"
           org-startup-indented t
           org-agenda-files '("~/Dropbox/new_org/"
@@ -337,20 +337,48 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
              "* %i%?")
             ("j" "Journal Entry" entry
              (file+olp+datetree "~/Dropbox/new_org/journal.org")
-             "* %i%?")
-            ("f" "Food log" item
-             (file+olp+datetree "~/Dropbox/new_org/food.org" "Nahrung")
-             "%U %^{Essen}\n%?")
-            ("p" "Poop log" item
-             (file+olp+datetree "~/Dropbox/new_org/food.org" "Stuhlgang")
-             "%U %^{Konsistenz}, %^{Ätzend}\n%?"))
+             "* %<%H:%M>\n%K %i%?"))
           org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
           org-log-done 'time
           org-log-into-drawer t)
     (setq org-agenda-custom-commands
-          '(("w" "Wetterwelt"
-             (org-agenda-overriding-header "Wetterwelt")
-             (org-agenda-skip-function #'my-org-agenda-skip-all-siblings-but-first))))
+          '(("i" "Inbox"
+             tags "+CATEGORY=\"inbox\""
+             ((org-agenda-overriding-header "Inbox\n=====\n")))
+            ("wd" "Work day agenda"
+             ((agenda "" ((org-agenda-span 1)))
+              (tags-todo "+CATEGORY=\"work\"+PRIORITY=\"A\""
+                         ((org-agenda-overriding-header "Next Actions\n============\n")))
+              (tags-todo "WAITING+CATEGORY=\"work\""
+                         ((org-agenda-sorting-strategy '(time-up))
+                          (org-agenda-overriding-header "Warten auf\n==========\n")))
+              (tags-todo "+CATEGORY=\"work\"-PRIORITY=\"A\""
+                         ((org-agenda-sorting-strategy '(priority-down))
+                          (org-agenda-overriding-header "Next in Line\n============\n")))
+              ))
+            ("wr" "Report"
+             ((agenda "" ((org-agenda-span 7)
+                          (org-agenda-start-day
+                           (format-time-string "%Y-%m-%d"
+                                               (days-to-time
+                                                (- (time-to-number-of-days (current-time)) 6))))
+                          (org-agenda-show-log t)
+                          (org-agenda-use-time-grid nil)
+                          (org-agenda-category-filter-preset '("+work"))
+                                          ;(org-agenda-overriding-header "Letzte Woche\n============\n")
+                          ))
+              (agenda "" ((org-agenda-span 7)
+                          (org-agenda-show-log t)
+                          (org-agenda-use-time-grid nil)
+                          (org-agenda-category-filter-preset '("+work"))
+                          )))
+             ((org-agenda-with-colors nil)
+              (org-agenda-compact-blocks t)
+              (org-agenda-remove-tags t)
+              (ps-number-of-columns 2)
+              (ps-landscape-mode t))
+             ("~/report-agenda.ps")))))
+
   ;; make org files look nicer
   (use-package org-bullets
     :ensure t)
@@ -539,6 +567,12 @@ To use code folding, hs-minor-mode has to be activated, hence the last hook belo
   (pyvenv-mode 1)
   (pyvenv-tracking-mode 1))
 #+end_src
+*** PHP
+Yes, sometimes I have to deal with this abomination. Thus, minimal support here.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package php-mode
+    :ensure t)
+#+END_SRC
 
 *** Javascript
 For a start, just use the stuff found [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html][here]] (and use use-package)
@@ -735,6 +769,15 @@ goal of replacing my =zsh=, =tmux= and =vim= workflow. Most of this is blatantly
 stolen from [[http://www.howardism.org/][Howard Abrams]].
 
 #+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package eshell
+    :init
+    (setq eshell-scroll-to-bottom-on-input 'all
+          eshell-error-if-no-glob t
+          eshell-hist-ignoredups t
+          eshell-save-history-on-exit t
+          eshell-prefer-lisp-functions nil
+          eshell-destroy-buffer-when-process-dies t))
+
   (defun eshell-here ()
     "Opens up a new shell in the directory associated with the current buffer's
    file. The eshell is renamed to match that directory to make multiple eshell
