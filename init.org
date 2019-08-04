@@ -562,7 +562,7 @@ Use ipython for inferior python mode and use simple prompt to avoid gibberish ca
         python-shell-prompt-block-regexp "\\.\\.\\.:?") ;; Ensure functioning multi-line statements
 #+end_src
 
-**** Anaconda Mode
+***** Anaconda Mode
 
 According to the [[https://github.com/proofit404/anaconda-mode][Anaconda Mode Git repository]], Anaconda mode provides:
 
@@ -596,7 +596,7 @@ To use code folding, hs-minor-mode has to be activated, hence the last hook belo
     :ensure t)
 #+end_src
 
-**** Managing virtual environments
+***** Managing virtual environments
 
 #+begin_src emacs-lisp :tangle yes
 (use-package pyvenv
@@ -606,14 +606,14 @@ To use code folding, hs-minor-mode has to be activated, hence the last hook belo
   (pyvenv-mode 1)
   (pyvenv-tracking-mode 1))
 #+end_src
-*** PHP
+**** PHP
 Yes, sometimes I have to deal with this abomination. Thus, minimal support here.
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package php-mode
     :ensure t)
 #+END_SRC
 
-*** Javascript
+**** Javascript
 For a start, just use the stuff found [[https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html][here]] (and use use-package)
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package js2-mode
@@ -660,7 +660,7 @@ The following is for auto-completion and REPL. Requires installation of `tern`:
     (define-key tern-mode-keymap (kbd "M-,") nil))
 
 #+END_SRC
-*** Common Lisp
+**** Common Lisp
 I use [[http://quicklisp.org][Quicklisp]], which (as I've been told) spares some hassle setting up slime. Otoh, the slime version that came with it is buggy when used with emacs 26.1 (which I use). So I just put a newer slime version in the quicklisp slime directory and it seems to work so far.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
