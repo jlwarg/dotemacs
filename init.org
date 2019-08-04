@@ -342,7 +342,13 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
              "* %<%H:%M>\n%K %i%?")
             ("C" "to clocked" item
              (clock)
-             "- %<%H:%M> %?")))
+             "- %<%H:%M> %?")
+            ("a" "Appointment" entry
+             (file+headline "~/Dropbox/new_org/appointments.org" "Appointments")
+             "* %?\n%(org-time-stamp t)")
+            ("t" "Tickler" entry
+             (file+headline "~/Dropbox/new_org/appointments.org" "Tickler")
+             "* %?\n%(org-time-stamp nil)")))
           org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
           org-log-done 'time
           org-log-into-drawer t)
