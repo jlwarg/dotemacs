@@ -309,6 +309,7 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
     (setq org-return-follows-link t)
     (setq org-todo-keywords
           '((sequence "TODO(t)" "WAITING(w@/!)" "|" "DONE(d:w::!)" "CANCELLED(c@)")))
+    (setq org-default-priority ?C) ;; Headlines without priority should be treated the same as those with priority C
     (org-babel-do-load-languages 'org-babel-load-languages '((python . t)
                                                              (shell . t)
                                                              (sql . t)
