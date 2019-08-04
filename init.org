@@ -44,64 +44,64 @@ blindly.*
   (setq tramp-default-method "ssh")
   (add-to-list 'default-frame-alist '(font . "Source Code Pro 10"))
   (setq initial-scratch-message ";; Everyone is scared that if they had traveled back in time they could do something very small
-;; that would change their whole life. But no one thinks that doing something very small
-;; in the present will have a huge impact on their future.")
+  ;; that would change their whole life. But no one thinks that doing something very small
+  ;; in the present will have a huge impact on their future.")
 
-  ;; send mail with msmtp
-  (setq sendmail-program "/usr/bin/msmtp")
+    ;; send mail with msmtp
+    (setq sendmail-program "/usr/bin/msmtp")
 
-  ;; Enable emacs to send desktop notifications
-  (require 'notifications)
-
-
-  ;; never center point when scrolling out of frame, just bring it back to view
-  ;; aka "Scroll like vim would", sort of
-  (setq scroll-conservatively 101)
-
-  ;; set european/military time format
-  (setq display-time-24hr-format 1)
-
-  ;; Localize calendar
-  ;; See: https://www.emacswiki.org/emacs/CalendarLocalization
-  (add-hook 'calendar-load-hook
-            (lambda ()
-              (calendar-set-date-style 'european)))
-  (setq calendar-week-start-day 1
-        calendar-day-name-array ["Sonntag" "Montag" "Dienstag" "Mittwoch"
-                                 "Donnerstag" "Freitag" "Samstag"]
-        calendar-month-name-array ["Januar" "Februar" "März" "April" "Mai"
-                                   "Juni" "Juli" "August" "September"
-                                   "Oktober" "November" "Dezember"]
-        solar-n-hemi-seasons '("Frühlingsanfang" "Sommeranfang" "Herbstanfang" "Winteranfang")
-        holiday-general-holidays '((holiday-fixed 1 1 "Neujahr")
-                                   (holiday-fixed 5 1 "Tag der Arbeit")
-                                   (holiday-fixed 10 3 "Tag der Deutschen Einheit"))
-        holiday-christian-holidays '((holiday-float 12 0 -4 "1. Advent" 24)
-                                     (holiday-float 12 0 -3 "2. Advent" 24)
-                                     (holiday-float 12 0 -2 "3. Advent" 24)
-                                     (holiday-float 12 0 -1 "4. Advent" 24)
-                                     (holiday-fixed 12 25 "1. Weihnachtstag")
-                                     (holiday-fixed 12 26 "2. Weihnachtstag")
-                                     (holiday-easter-etc -48 "Rosenmontag")
-                                     (holiday-easter-etc -2 "Karfreitag")
-                                     (holiday-easter-etc 0 "Ostersonntag")
-                                     (holiday-easter-etc 1 "Ostermontag")
-                                     (holiday-easter-etc +39 "Christi Himmelfahrt")
-                                     (holiday-easter-etc +49 "Pfingstsonntag")
-                                     (holiday-easter-etc +50 "Pfingstmontag")
-                                     (holiday-easter-etc +60 "Fronleichnam")
-                                     (holiday-fixed 11 1 "Allerheiligen")))
+    ;; Enable emacs to send desktop notifications
+    (require 'notifications)
 
 
-  ;; Basic orgmode settings
-  (global-set-key "\C-cl" 'org-store-link)
-  (global-set-key "\C-ca" 'org-agenda)
-  (global-set-key "\C-cc" 'org-capture)
-  (global-set-key "\C-cb" 'org-switchb)
+    ;; never center point when scrolling out of frame, just bring it back to view
+    ;; aka "Scroll like vim would", sort of
+    (setq scroll-conservatively 101)
 
-  ;; I want to be able to work with clients
-  (when (not (daemonp))
-    (server-start))
+    ;; set european/military time format
+    (setq display-time-24hr-format 1)
+
+    ;; Localize calendar
+    ;; See: https://www.emacswiki.org/emacs/CalendarLocalization
+    (add-hook 'calendar-load-hook
+              (lambda ()
+                (calendar-set-date-style 'european)))
+    (setq calendar-week-start-day 1
+          calendar-day-name-array ["Sonntag" "Montag" "Dienstag" "Mittwoch"
+                                   "Donnerstag" "Freitag" "Samstag"]
+          calendar-month-name-array ["Januar" "Februar" "März" "April" "Mai"
+                                     "Juni" "Juli" "August" "September"
+                                     "Oktober" "November" "Dezember"]
+          solar-n-hemi-seasons '("Frühlingsanfang" "Sommeranfang" "Herbstanfang" "Winteranfang")
+          holiday-general-holidays '((holiday-fixed 1 1 "Neujahr")
+                                     (holiday-fixed 5 1 "Tag der Arbeit")
+                                     (holiday-fixed 10 3 "Tag der Deutschen Einheit"))
+          holiday-christian-holidays '((holiday-float 12 0 -4 "1. Advent" 24)
+                                       (holiday-float 12 0 -3 "2. Advent" 24)
+                                       (holiday-float 12 0 -2 "3. Advent" 24)
+                                       (holiday-float 12 0 -1 "4. Advent" 24)
+                                       (holiday-fixed 12 25 "1. Weihnachtstag")
+                                       (holiday-fixed 12 26 "2. Weihnachtstag")
+                                       (holiday-easter-etc -48 "Rosenmontag")
+                                       (holiday-easter-etc -2 "Karfreitag")
+                                       (holiday-easter-etc 0 "Ostersonntag")
+                                       (holiday-easter-etc 1 "Ostermontag")
+                                       (holiday-easter-etc +39 "Christi Himmelfahrt")
+                                       (holiday-easter-etc +49 "Pfingstsonntag")
+                                       (holiday-easter-etc +50 "Pfingstmontag")
+                                       (holiday-easter-etc +60 "Fronleichnam")
+                                       (holiday-fixed 11 1 "Allerheiligen")))
+
+
+    ;; Basic orgmode settings
+    (global-set-key "\C-cl" 'org-store-link)
+    (global-set-key "\C-ca" 'org-agenda)
+    (global-set-key "\C-cc" 'org-capture)
+    (global-set-key "\C-cb" 'org-switchb)
+
+    ;; I want to be able to work with clients
+    (when (not (daemonp))
+      (server-start))
 #+end_src
 ** Bootstrap
 *** Package Sources
