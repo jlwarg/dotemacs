@@ -382,7 +382,26 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
               (org-agenda-remove-tags t)
               (ps-number-of-columns 2)
               (ps-landscape-mode t))
-             ("~/report-agenda.ps")))))
+             ("~/report-agenda.ps"))
+            ("pd" "personal day agenda"
+             ((agenda "" ((org-agenda-span 1)))
+              (tags-todo "+CATEGORY=\"personal\"+PRIORITY=\"A\""
+                         ((org-agenda-overriding-header "Next Actions\n============\n")))
+              (tags-todo "WAITING+CATEGORY=\"personal\""
+                         ((org-agenda-sorting-strategy '(time-up))
+                          (org-agenda-overriding-header "Warten auf\n==========\n")))
+              (tags-todo "+CATEGORY=\"personal\"-PRIORITY=\"A\""
+                         ((org-agenda-sorting-strategy '(priority-down))
+                          (org-agenda-overriding-header "Next in Line\n============\n")))))
+             ("pf" "Family members"
+               ((tags "+FUZZY"
+                      ((org-agenda-overriding-header "Fuzzy\n=====")))
+                (tags "+MAIKE"
+                      ((org-agenda-overriding-header "Maike\n=====")))
+                (tags "+TIMO"
+                      ((org-agenda-overriding-header "Timo\n====")))
+                (tags "+BRITT"
+                      ((org-agenda-overriding-header "Britt\n====="))))))))
 
   ;; make org files look nicer
   (use-package org-bullets
