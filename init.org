@@ -542,7 +542,17 @@ Emacs has a habit of changing `pwd` according to the path of the current file in
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
     (projectile-mode +1))
 #+END_SRC
-*** Python
+*** Languages
+**** Emacs Lisp
+#+begin_src emacs-lisp
+  (use-package elisp-slime-nav
+    :ensure t
+    :config
+    (dolist (hook '(emacs-lisp-mode-hook ielm-mode-hook))
+      (add-hook hook 'elisp-slime-nav-mode)))
+
+#+end_src
+**** Python
 Use ipython for inferior python mode and use simple prompt to avoid gibberish caused by ansi-color codes.
 `python-shell-prompt-block-regexp` needs to be set for multiline-statements to work in inferior-python-mode when company-mode is active. Thanks to `/u/fzmad` in [[https://www.reddit.com/r/emacs/comments/aruxah/python_shell_doesnt_work_with_multiple_lines_of/][this reddit thread]]. Completion still doesn't seem to work, though.
 
