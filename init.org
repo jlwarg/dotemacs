@@ -476,10 +476,14 @@ Try Origami..
  Magit looks like the best thing since sliced bread for this purpose.
 
  #+begin_src emacs-lisp :tangle yes
- (use-package magit
-   :ensure t
-   :config
-   (evil-add-hjkl-bindings magit-status-mode-map 'emacs))
+   (use-package magit
+     :ensure t
+     :config
+     (evil-add-hjkl-bindings magit-status-mode-map 'emacs))
+
+   (use-package evil-magit
+     :ensure t)
+
  #+end_src
    
 *** Smartparens
