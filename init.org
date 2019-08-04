@@ -492,6 +492,11 @@ Try Origami..
      :config
      (smartparens-global-mode)
      (require 'smartparens-config))
+
+   (use-package evil-smartparens
+     :ensure t
+     :config
+     (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
  #+end_src
    
 *** Company Mode
