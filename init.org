@@ -409,7 +409,7 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
                 (tags "+TIMO"
                       ((org-agenda-overriding-header "Timo\n====")))
                 (tags "+BRITT"
-                      ((org-agenda-overriding-header "Britt\n====="))))))))
+                      ((org-agenda-overriding-header "Britt\n=====")))))))
 
   ;; make org files look nicer
   (use-package org-bullets
