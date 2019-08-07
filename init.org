@@ -241,6 +241,7 @@ so here goes:
                         "m" '(:ignore t :which-key "mail")
                         "mn" 'notmuch-mua-new-mail
                         "mm" 'notmuch-jump-search
+                        "ms" 'notmuch-search
 
                         ;; org bindings
                         "o" '(:ignore t :which-key "org-mode")
