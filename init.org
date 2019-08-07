@@ -358,7 +358,8 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
              tags "+CATEGORY=\"inbox\""
              ((org-agenda-overriding-header "Inbox\n=====\n")))
             ("wd" "Work day agenda"
-             ((agenda "" ((org-agenda-span 1)))
+             ((agenda "" ((org-agenda-overriding-header "Inbox\n=====\n")
+                          (org-agenda-span 1)))
               (tags-todo "+CATEGORY=\"work\"+PRIORITY=\"A\""
                          ((org-agenda-overriding-header "Next Actions\n============\n")))
               (tags-todo "WAITING+CATEGORY=\"work\""
