@@ -103,6 +103,9 @@ blindly.*
     ;; I want to be able to work with clients
     (when (not (daemonp))
       (server-start))
+
+  ;; extend path so emacs can find all my executables
+  (setq exec-path (append exec-path '("~/.npm-packages/bin/")))
 #+end_src
 ** Bootstrap
 *** Package Sources
