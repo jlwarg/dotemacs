@@ -677,6 +677,14 @@ The following is for auto-completion and REPL. Requires installation of `tern`:
     (define-key tern-mode-keymap (kbd "M-,") nil))
 
 #+END_SRC
+
+And for an inferior process
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package js-comint
+    :ensure t)
+#+end_src
+
 **** Common Lisp
 I use [[http://quicklisp.org][Quicklisp]], which (as I've been told) spares some hassle setting up slime. Otoh, the slime version that came with it is buggy when used with emacs 26.1 (which I use). So I just put a newer slime version in the quicklisp slime directory and it seems to work so far.
 
