@@ -353,10 +353,10 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
              "* %?\n%(org-time-stamp t)")
             ("t" "Tickler" entry
              (file+headline "~/Dropbox/new_org/appointments.org" "Tickler")
-             "* %?\n%(org-time-stamp nil)")))
+             "* %?\n%(org-time-stamp nil)"))
           org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
           org-log-done 'time
-          org-log-into-drawer t)
+          org-log-into-drawer t))
     (setq org-agenda-custom-commands
           '(("i" "Inbox"
              tags "+CATEGORY=\"inbox\""
