@@ -657,7 +657,9 @@ Refactoring stuff recommended by my source of inspiration (see above)
     ;; unbind it.
     (define-key js-mode-map (kbd "M-.") nil)
     (add-hook 'js-mode-hook (lambda ()
-                              (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t))))
+                              (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+    (add-hook 'js-mode-hook (lambda ()
+                              (tern-mode t))))
 #+END_SRC
 The following is for auto-completion and REPL. Requires installation of `tern`:
 #+BEGIN_SRC shell
