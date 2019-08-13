@@ -451,6 +451,7 @@ Notmuch is installed via the host's package manager. We need compatibility and n
 
 #+begin_src emacs-lisp :tangle yes
   (require 'notmuch)
+  (require 'org-notmuch)
   (setq message-kill-buffer-on-exit t) ; kill the message buffer after sending mail
 #+end_src
 
