@@ -454,6 +454,19 @@ Notmuch is installed via the host's package manager. We need compatibility and n
   (setq message-kill-buffer-on-exit t) ; kill the message buffer after sending mail
 #+end_src
 
+** RSS Feeds
+#+begin_src emacs-lisp :tangle yes
+  (use-package elfeed-org
+    :ensure t)
+
+  (use-package elfeed
+    :ensure t
+    :init
+    (setq elfeed-db-directory "~/Dropbox/.elfeed")
+    (elfeed-org)
+    (setq rmh-elfeed-org-files (list "~/Dropbox/new_org/elfeed.org")))
+#+end_src
+
 ** Snippets
 I want to get my feet wet with snippets, inspired by howardism.org
 #+begin_src emacs-lisp :tangle yes
