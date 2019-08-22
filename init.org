@@ -455,6 +455,26 @@ Notmuch is installed via the host's package manager. We need compatibility and n
 #+end_src
 
 ** RSS Feeds
+I'm gonna use elfeed. Since it ist synced to dropbox, the db should be written
+often so I won't see the same messages again on another machine.
+The following was found at [[http://pragmaticemacs.com/emacs/read-your-rss-feeds-in-emacs-with-elfeed/][pragmatic emacs]].
+Helper functions:
+#+begin_src emacs-lisp :tangle yes
+  (defun jlwarg/elfeed-load-db-and-open ()
+    "Wrapper to load the elfeed db from disk before opening"
+    (interactive)
+    (elfeed-db-load)
+    (elfeed)
+    (elfeed-search-update--force))
+
+  (defun jlwarg/elfeed-save-db-and-bury ()
+    "Wrapper to save the elfeed db to disk before burying buffer"
+    (interactive)
+    (elfeed-db-save)
+    (quit-window))
+#+end_src
+
+And elfeed itself:
 #+begin_src emacs-lisp :tangle yes
   (use-package elfeed-org
     :ensure t)
@@ -464,7 +484,10 @@ Notmuch is installed via the host's package manager. We need compatibility and n
     :init
     (setq elfeed-db-directory "~/Dropbox/.elfeed")
     (elfeed-org)
-    (setq rmh-elfeed-org-files (list "~/Dropbox/new_org/elfeed.org")))
+    (setq rmh-elfeed-org-files (list "~/Dropbox/new_org/elfeed.org"))
+    :bind (:map elfeed-search-mode-map
+              ("q" . jlwarg/elfeed-save-db-and-bury)))
+
 #+end_src
 
 ** Snippets
