@@ -860,7 +860,7 @@ Some enhancements for dired
     "In dired, open the
    file named on this line."
     (interactive)
-    (let* ((file (dired-get-filename nil t)))
+    (let* ((file (dired-get-filename)))
       (call-process "xdg-open" nil 0 nil file)))
 
   (define-key dired-mode-map (kbd "C-c o") 'jlwarg/dired-open-file)
