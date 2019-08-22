@@ -29,9 +29,9 @@ blindly.*
 #+begin_src emacs-lisp :tangle yes
   (global-linum-mode t)           ; Line numbers in all buffers
   (setq-default abbrev-mode t)    ; I want to use my abbreviations everywhere
-  (menu-bar-mode -1)              ; No menu bar
-  (setq tool-bar-mode nil)        ; No tool bar
-  (setq scroll-bar-mode nil)      ; No scroll bar
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1)) ; no menu-bar
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1)) ; no tool-bar
+  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1)) ; no scroll bar
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3") ;; fixes Elpa problems for emacs < 26.3
   (setq inhibit-startup-screen t) ; No startup screen
   ;; recognize themes in ~/.emacs.d/themes
