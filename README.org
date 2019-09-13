@@ -1,6 +1,6 @@
 * My Emacs configuration
 
-This is my first attempt at an emacs configuration after getting a taste of emacs as a spacemacs user.
+This is my first attempt at a personal emacs configuration after getting a taste of emacs as a spacemacs user.
 
 ** Disclaimer
 
