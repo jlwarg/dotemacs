@@ -505,7 +505,7 @@ I want to get my feet wet with snippets, inspired by howardism.org
     :config
     (define-key yas-minor-mode-map (kbd "<tab>") nil) ;; <tab> is too important e.g. in orgmode
     (define-key yas-minor-mode-map (kbd "TAB") nil)   ;; thus yields unexpected behaviour
-    (define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand))
+    (define-key yas-minor-mode-map (kbd "C-<return>") #'yas-expand))
 
   (use-package yasnippet-snippets
     :ensure t) ;; A set of snippets
