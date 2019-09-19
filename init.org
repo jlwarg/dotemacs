@@ -36,7 +36,6 @@ blindly.*
   (setq inhibit-startup-screen t) ; No startup screen
   ;; recognize themes in ~/.emacs.d/themes
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-  (load-theme 'adwaita t)
   (setq indent-tabs-mode nil)     ; always use spaces for indenting
   (column-number-mode)            ; Display column number in mode line
   (display-time)                  ; Display time in mode line
@@ -133,7 +132,6 @@ Although I don't want to use spacemacs, I really like its appearance, so:
     :ensure t
     :defer t
     :init
-    (load-theme 'spacemacs-dark t)
     (setq spacemacs-theme-org-agenda-height nil)
     (setq spacemacs-theme-org-height nil))
 
@@ -146,6 +144,13 @@ Although I don't want to use spacemacs, I really like its appearance, so:
     (require 'spaceline-config)
     (spaceline-spacemacs-theme))
 #+END_SRC
+And add some more themes:
+#+begin_src emacs-lisp :tangle yes
+  (use-package plan9-theme
+    :ensure t
+    :init
+    (load-theme 'plan9-theme))
+#+end_src
 
 ** Evil Mode
  I really tried to go without it, but text navigation in vanilla Emacs is crippled.
