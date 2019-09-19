@@ -257,7 +257,7 @@ so here goes:
                         "o," 'org-insert-structure-template
                         "of" '(:ignore t :which-key "org files")
                         "ofi" '((lambda () (interactive)
-                                 (find-file "~/Dropbox/new_org/inbox.org"))
+                                 (find-file "~/Sync/inbox.org"))
                                :which-key "open inbox")
                         "ofg" '((lambda () (interactive)
                                  (find-file "~/gtd/gtd.org"))
@@ -338,25 +338,25 @@ Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/
     (evil-org-agenda-set-keys)
     (setq org-catch-invisible-edits "smart"
           org-startup-indented t
-          org-agenda-files '("~/Dropbox/new_org/"
+          org-agenda-files '("~/Sync/"
                              "~/org/")
-          org-directory "~/Dropbox/new_org"
+          org-directory "~/Sync"
           org-default-notes-file (concat org-directory "/inbox.org")
           org-capture-templates
           '(("i" "Inbox" entry
-             (file "~/Dropbox/new_org/inbox.org")
+             (file "~/Sync/inbox.org")
              "* %i%?")
             ("j" "Journal Entry" entry
-             (file+olp+datetree "~/Dropbox/new_org/journal.org")
+             (file+olp+datetree "~/Sync/journal.org")
              "* %<%H:%M>\n%K %i%?")
             ("C" "to clocked" item
              (clock)
              "- %<%H:%M> %?")
             ("a" "Appointment" entry
-             (file+headline "~/Dropbox/new_org/appointments.org" "Appointments")
+             (file+headline "~/Sync/appointments.org" "Appointments")
              "* %?\n%(org-time-stamp t)")
             ("t" "Tickler" entry
-             (file+headline "~/Dropbox/new_org/appointments.org" "Tickler")
+             (file+headline "~/Sync/appointments.org" "Tickler")
              "* %?\n%(org-time-stamp nil)"))
           org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
           org-log-done 'time
@@ -489,7 +489,7 @@ And elfeed itself:
     :init
     (setq elfeed-db-directory "~/Dropbox/.elfeed")
     (elfeed-org)
-    (setq rmh-elfeed-org-files (list "~/Dropbox/new_org/elfeed.org"))
+    (setq rmh-elfeed-org-files (list "~/Sync/elfeed.org"))
     :bind (:map elfeed-search-mode-map
               ("q" . jlwarg/elfeed-save-db-and-bury)))
 
