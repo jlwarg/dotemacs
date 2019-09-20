@@ -485,8 +485,11 @@ And elfeed itself:
     (setq elfeed-db-directory "~/Dropbox/.elfeed")
     (elfeed-org)
     (setq rmh-elfeed-org-files (list "~/Dropbox/new_org/elfeed.org"))
-    :bind (:map elfeed-search-mode-map
-              ("q" . jlwarg/elfeed-save-db-and-bury)))
+    :bind ((:map elfeed-search-mode-map
+                 ("q" . jlwarg/elfeed-save-db-and-bury))
+           (:map elfeed-show-mode-map
+                 ("<tab>" . elfeed-show-next-link))))
+
 
 #+end_src
 
