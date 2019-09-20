@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: docheader
+# key: dh
+# --
+#+TITLE: ${1:Document Title}
+#+AUTHOR: Jochen Luig
+#+EMAIL: jochen.luig@gmail.com
+
+$0
+

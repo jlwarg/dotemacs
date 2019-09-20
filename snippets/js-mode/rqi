@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor: Jochen Luig <jochen.luig@gmail.com>
+# name: require
+# key: rqi
+# --
+
+const ${1:name} = require('${2:module}');

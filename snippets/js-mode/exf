@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# uuid: 45f3a8b4-7ed0-4d80-aa77-1cf79339b6b6
+# contributor: Jochen Luig <jochen.luig@gmail.com
+# name: exportFunction
+# key: exf
+# --
+
+exports.${1:func} = (${2:params}) => {
+  $0
+}
