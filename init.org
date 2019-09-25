@@ -255,19 +255,6 @@ so here goes:
                         "oa" 'org-agenda
                         "oc" 'org-capture
                         "o," 'org-insert-structure-template
-                        "of" '(:ignore t :which-key "org files")
-                        "ofi" '((lambda () (interactive)
-                                 (find-file "~/Sync/inbox.org"))
-                               :which-key "open inbox")
-                        "ofg" '((lambda () (interactive)
-                                 (find-file "~/gtd/gtd.org"))
-                               :which-key "open gtd")
-                        "oft" '((lambda () (interactive)
-                                 (find-file "~/gtd/tickler.org"))
-                               :which-key "open tickler")
-                        "ofs" '((lambda () (interactive)
-                                 (find-file "~/gtd/someday.org"))
-                               :which-key "open someday")
                         ;; Projectile
                         "p" '(projectile-command-map :which-key "Projectile")
                         ;; Redaktionssystem specific stuff
