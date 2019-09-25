@@ -287,7 +287,9 @@ so here goes:
 ** Org Mode
    
 Org-Mode shows strange behaviour with evil: If I'm in a graphical frame ('emacsclient -c'), <TAB> is bound to 'org-cycle', if I open the emacsclient in a terminal ('emacsclient -t'), it is bound to 'evil-jump-forward'.
-Solution: Bind #'org-cycle to "TAB" explicitly.
+Solution: Bind #'org-cycle to "TAB" explicitly. (This is probably due to <tab>
+and TAB being different)
+
 Current org configuration is inspired by [[https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html][this blog post]].
 
 #+BEGIN_SRC emacs-lisp :tangle yes
