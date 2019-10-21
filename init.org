@@ -220,6 +220,7 @@ so here goes:
                         ;; applications
                         "a" '(:ignore t :which-key "applications")
                         "ad" 'deft
+                        "ae" 'elfeed
                         "ar" 'deer
                         ;; buffers
                         "b" '(:ignore t :which-key "buffers")
