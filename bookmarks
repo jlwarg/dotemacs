@@ -1,0 +1,52 @@
+;;;; Emacs Bookmark Format Version 1 ;;;; -*- coding: utf-8-emacs -*- 
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("fefe"
+ (location . "@6-months-ago +unread +fefe")
+ (tags "fefe" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("fun"
+ (location . "@6-months-ago +unread +fun")
+ (tags "fun" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("emacs"
+ (location . "@6-months-ago +unread +emacs")
+ (tags "emacs" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("vim"
+ (location . "@6-months-ago +unread +vim")
+ (tags "vim" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("hn"
+ (location . "@6-months-ago +unread +hn")
+ (tags "hn" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("golem"
+ (location . "@6-months-ago +unread +golem")
+ (tags "golem" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("heise"
+ (location . "@6-months-ago +unread +heise")
+ (tags "heise" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("tagesschau"
+ (location . "@6-months-ago +unread +tagesschau")
+ (tags "tagesschau" "unread")
+ (handler . elfeed-search-bookmark-handler))
+("org-capture-last-stored-marker"
+ (filename . "~/Dropbox/new_org/personal.org")
+ (front-context-string . "*** Narwhale wec")
+ (rear-context-string . "s Vollbildmodus\n")
+ (position . 552))
+("org-refile-last-stored"
+ (filename . "~/Dropbox/new_org/personal.org")
+ (front-context-string . "*** Narwhale wec")
+ (rear-context-string . "s Vollbildmodus\n")
+ (position . 552))
+("org-capture-last-stored"
+ (filename . "~/Dropbox/new_org/food.org")
+ (front-context-string . "- [2019-06-10 Mo")
+ (rear-context-string . " Kaffee (240ml)\n")
+ (position . 2016))
+)
