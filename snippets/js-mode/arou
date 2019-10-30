@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# contributor: Jochen Luig <jochen.luig@gmail.com>
+# name: approute
+# key: arou
+# --
+${1:app}.${2:post}('${3:/mypath}', (req, res) => ${function}(req, res));
