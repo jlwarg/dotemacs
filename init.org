@@ -149,7 +149,7 @@ And add some more themes:
   (use-package plan9-theme
     :ensure t
     :init
-    (load-theme 'plan9-theme))
+    (load-theme 'plan9 t))
 #+end_src
 
 ** Evil Mode
