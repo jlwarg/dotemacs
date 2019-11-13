@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
 # contributor: Jochen Luig <jochen.luig@gmail.com
-# name: console.log
-# key: clog
-# group: console
+# name: anonFunction
+# key: afn
 # --
-
-console.log(${1:object});
+function($1) {
+  $0
+}

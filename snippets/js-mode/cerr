@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
 # contributor: Jochen Luig <jochen.luig@gmail.com
-# name: console.log
-# key: clog
+# name: console.error
+# key: cerr
 # group: console
 # --
 
-console.log(${1:object});
+console.error(${1:object});

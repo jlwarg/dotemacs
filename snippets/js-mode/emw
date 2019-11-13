@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: express middleware
+# key: emw
+# --
+app.${1:use}(function(${2:req, res, next}) {
+    $0
+    next();
+});

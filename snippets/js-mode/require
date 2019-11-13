@@ -1,0 +1,4 @@
+# key: req
+# name: require
+# --
+require('$1')$0

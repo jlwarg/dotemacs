@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Org Document Header
+# key: dh
+# --
+#+TITLE: $1
+#+AUTHOR: Jochen Luig
+#+EMAIL: ${2:luig@wetterwelt.de}
+
+$0
