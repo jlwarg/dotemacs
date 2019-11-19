@@ -47,7 +47,9 @@ blindly.*
   ;; in the present will have a huge impact on their future.")
 
     ;; send mail with msmtp
-    (setq sendmail-program "/usr/bin/msmtp")
+  (setq sendmail-program "/usr/bin/msmtp"
+        send-mail-function 'smtpmail-send-it
+        smtpmail-smtp-server "localhost")
 
     ;; Enable emacs to send desktop notifications
     (require 'notifications)
