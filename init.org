@@ -441,6 +441,13 @@ Now bind a key on Window manager to the following shell script:
 #+end_src
 This will do the right thing whether you're in emacs or not at the time.
 
+** Markdown
+ #+begin_src emacs-lisp :tangle yes
+   (use-package markdown-mode
+     :ensure t
+     :defer t)
+ #+end_src
+
 ** Reading email
 
 Notmuch is installed via the host's package manager. We need compatibility and notmuch.el comes with the notmuch installation. So just use it.
