@@ -901,11 +901,17 @@ stolen from [[http://www.howardism.org/][Howard Abrams]].
 Functions with the prefix "eshell/" are directly available in eshell. The
 following one will exit eshell and close the window.
 
+Fixed bug after consulting stackexchange [[https://emacs.stackexchange.com/questions/53830/error-in-custom-eshell-function-exit-and-close-window/53844#53844][here]].
+
 #+BEGIN_SRC emacs-lisp :tangle yes
   (defun eshell/x ()
-    (insert "exit")
-    (eshell-send-input)
-    (delete-window))
+    (throw 'eshell-terminal t))
+
+  (defun jlwarg/delete-window-on-multiple ()
+    (when (not (one-window-p))
+      (delete-window)))
+
+  (advice-add 'eshell-life-is-too-much :after 'jlwarg/delete-window-on-multiple)
 #+END_SRC
 *** Auto Insert
 For some files, I want to have some boilerplate inserted on creation, e.g. org
