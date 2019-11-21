@@ -895,12 +895,16 @@ stolen from [[http://www.howardism.org/][Howard Abrams]].
                        (file-name-directory (buffer-file-name))
                      default-directory))
            (height (/ (window-total-height) 3))
-           (name (car (last (split-string parent "/" t)))))
+           (name (car (last (split-string parent "/" t))))
+           (buffer-name (concat "*eshell: " name "*"))
+           (existing-buffer (get-buffer buffer-name)))
       (split-window-vertically (- height))
       (other-window 1)
-      (eshell "new")
-      (rename-buffer (concat "*eshell: " name "*"))
-
+      (if existing-buffer
+          (switch-to-buffer existing-buffer)
+        (progn
+          (eshell "new")
+          (rename-buffer buffer-name)))
       (insert (concat "ls"))
       (eshell-send-input)))
 
