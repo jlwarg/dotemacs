@@ -4,4 +4,4 @@
 # key: rqi
 # --
 
-const ${1:name} = require('$2');
+const ${1:name} = require('${2:$1}');$0
