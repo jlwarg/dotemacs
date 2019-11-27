@@ -243,6 +243,11 @@ so here goes:
                         "ff" 'helm-find-files
                         "fs" 'save-buffer
 
+                        ;; insert
+                        "i" '(:ignore t :which-key "insert")
+                        "it" 'jlwarg/insert-rounded-time
+                        "if" '(lambda () (interactive) (jlwarg/insert-rounded-time t))
+
                         ;; magit bindings
                         "g" '(:ignore t :which-key "git")
                         "gs" '(magit-status :which-key "git status")
@@ -815,6 +820,17 @@ Credits go to [[https://batsov.com/articles/2011/11/19/why-emacs/][Bozhidar Bats
       (if mark-active
           (buffer-substring (region-beginning) (region-end))
         (read-string "Look up: ")))))
+
+  (defun jlwarg/insert-rounded-time (&optional prefix)
+    "Insert time rounded to last 5 minutes in %H:%M format.
+  With prefix argument, round to next 5 minutes"
+    (interactive "P")
+    (let* ((current-minute (if prefix
+                               (+ 5 (string-to-number (format-time-string "%M")))
+                             (string-to-number (format-time-string "%M"))))
+           (current-hour (+ (/ current-minute 60) (string-to-number (format-time-string "%H")))))
+      (insert (concat (format "%02d:" current-hour)
+                      (format "%02d" (- (% current-minute 60) (% current-minute 5)))))))
 #+END_SRC
 
 The following ones are for time management in orgmode. I maintain an org-table
