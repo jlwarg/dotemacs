@@ -459,12 +459,12 @@ Notmuch is installed via the host's package manager. We need compatibility and n
 
 #+begin_src emacs-lisp :tangle yes
   (require 'notmuch)
-  (require 'org-notmuch)
+  (require 'ol-notmuch)
   (setq message-kill-buffer-on-exit t) ; kill the message buffer after sending mail
 #+end_src
 
 ** RSS Feeds
-I'm gonna use elfeed. Since it ist synced to dropbox, the db should be written
+I'm gonna use elfeed. Since it is synced to dropbox, the db should be written
 often so I won't see the same messages again on another machine.
 The following was found at [[http://pragmaticemacs.com/emacs/read-your-rss-feeds-in-emacs-with-elfeed/][pragmatic emacs]].
 Helper functions:
